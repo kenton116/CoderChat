@@ -3,4 +3,6 @@ extends layout
 block content
   h1 CoderChat
   p Welcome to CoderChat 
-  a(href="/auth/google") Sign in with Google
+  a(href="/login") ログイン
+  if user
+    p 現在 #{user.username} でログイン中

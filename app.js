@@ -6,8 +6,36 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
-
 var app = express();
+var passport = require('passport');
+var session = require('express-session');
+
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GOOGLE_CLIENT_ID = "48219968582-s2hu1s7rme9ej5os073tilv15e7nhei4.apps.googleusercontent.com";
+var GOOGLE_CLIENT_SECRET = "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";
+var CALLBACK_URL = "http://localhost:8000/auth/google/callback"
+
+passport.serializeUser(function (user, done) {
+  done(null, { id: user.id, name: user.name });
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, { id: user.id, name: user.name });
+});
+
+passport.use(new GoogleStrategy({
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
+        callbackURL: "http://localhost:8000/auth/google/callback",
+        passReqToCallback   : true
+    }, function(request, accessToken, refreshToken, profile, done) {
+      if (profile) {
+        return done(null, profile);
+      } else {
+        return done(null, false);
+      }
+    }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +50,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+
+app.get('/auth/google', passport.authenticate('google', {
+  scope: [
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+  ]
+}));
+
+app.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/'
+}));
 
 app.use(session({ secret: 'e55be81b307c1c09', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
