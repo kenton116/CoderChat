@@ -1,6 +1,11 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
+  h1 エラー
+  h3 何か問題が起こっているようです。
+  a(href="/") CoderChat
+  br
+  a(href="/help") ヘルプ
+  h2= message
+  h3= error.status
   pre #{error.stack}

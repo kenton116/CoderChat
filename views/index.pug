@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  h1 CoderChat
-  p Welcome to CoderChat 
-  a(href="/login") ログイン
+  h1 会話して、学ぼう。💬
+  p リアルタイムチャットサービス CoderChat
   if user
-    p 現在 #{user.username} でログイン中
+    a(href="/dashboard") ダッシュボード
+    br
+    a(href="/logout") #{user.username} をログアウト
+  else
+    a(href="/login") ログイン

@@ -1,41 +1,107 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var logoutRouter = require('./routes/logout');
-var app = express();
-var passport = require('passport');
-var session = require('express-session');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
+const quizRouter = require('./routes/quiz');
+const dashboardRouter = require('./routes/dashboard');
+const roomRouter = require('./routes/room');
+const app = express();
 
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var GOOGLE_CLIENT_ID = "48219968582-s2hu1s7rme9ej5os073tilv15e7nhei4.apps.googleusercontent.com";
-var GOOGLE_CLIENT_SECRET = "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";
-var CALLBACK_URL = "http://localhost:8000/auth/google/callback"
+const User = require('./models/user');
+const Quiz = require('./models/quiz');
+const Chat = require('./models/chat');
+User.sync();
+Quiz.sync();
+Chat.sync();
+
+const passport = require('passport');
+const session = require('express-session');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+
+const GITHUB_CLIENT_ID = 'c0a5237c0b048dde8ce7';
+const GITHUB_CLIENT_SECRET = 'cef8788b6631cee1f9200732b0356480cca545fa';
+const GITHUB_CALLBACKURL = 'http://localhost:8000/auth/github/callback';
+const GitHubStrategy = require('passport-github2').Strategy;
 
 passport.serializeUser(function (user, done) {
-  done(null, { id: user.id, name: user.name });
+  done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
-  done(null, { id: user.id, name: user.name });
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
 });
 
+const clientID = '48219968582-s2hu1s7rme9ej5os073tilv15e7nhei4.apps.googleusercontent.com'
+const clientSecret = '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'
+const callbackURL = 'http://localhost:8000/auth/google/callback'
 passport.use(new GoogleStrategy({
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:8000/auth/google/callback",
-        passReqToCallback   : true
-    }, function(request, accessToken, refreshToken, profile, done) {
-      if (profile) {
-        return done(null, profile);
-      } else {
-        return done(null, false);
-      }
-    }
+  clientID, clientSecret, callbackURL
+}, function (accessToken, refreshToken, profile, done) {
+  process.nextTick(function () {
+    User.upsert({
+      userId: profile.id,
+      username: profile.displayName
+    }).then(() => {
+      console.info('データベース追加OK');
+      return done(null, { id:profile.id, username:profile.displayName });
+    });
+  })
+}
 ));
+
+passport.use(new GitHubStrategy({
+  clientID: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  callbackURL: GITHUB_CALLBACKURL
+},
+  function (accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      User.upsert({
+        userId: profile.id,
+        username: profile.username
+      }).then(() => {
+        console.info('データベース追加OK');
+        return done(null, profile);
+      });
+    });
+  }
+));
+
+app.use(
+  session({
+    secret: '2a95804fe4aa4b3d',
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/google', passport.authenticate('google', {
+  scope: ['email','profile']
+}));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
+  function (req, res) {
+    res.redirect('/dashboard')
+});
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] }),
+  function (req, res) {
+});
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    res.redirect('/dashboard');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,19 +116,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
-
-app.get('/auth/google', passport.authenticate('google', {
-  scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-  ]
-}));
-
-app.get( '/auth/google/callback',
-    passport.authenticate( 'google', {
-        successRedirect: '/auth/google/success',
-        failureRedirect: '/'
-}));
+app.use('/quiz', quizRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/room', roomRouter);
 
 app.use(session({ secret: 'e55be81b307c1c09', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
@@ -73,6 +129,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -81,7 +138,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { user: req.user });
 });
+
 
 module.exports = app;

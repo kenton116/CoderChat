@@ -17,3 +17,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: CoderChat
+    volumes:
+     - CoderChat-data:/var/lib/postgresql/data
+volumes:
+ CoderChat-data:
+    external: true
