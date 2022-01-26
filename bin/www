@@ -24,6 +24,7 @@ const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
 let chooseQuizId = 0;
+let quizContent;
 
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
@@ -54,13 +55,14 @@ function chooseQuiz() {
         quizId: chooseQuizId
       },
     }).then(quiz => {
-      res.json({
-        quiz: true,
-        quizName: quiz.quizName,
-        question: quiz.quizstion,
-        answer: quiz.answer,
-        createdBy: quiz.createdBy
-      });
+      quizContent = [
+        { quiz: true },
+        { quizName: quiz.quizName },
+        { question: quiz.quizstion },
+        { answer: quiz.answer },
+        { createdBy: quiz.createdBy },
+      ]
+      console.log('設定完了')
       setTimeout(30000 , chooseQuiz)
     });
   });
@@ -70,6 +72,11 @@ function chooseQuiz() {
     });
   }
 };
+
+app.get('/api/quiz', (req, res) => {
+  res.json(quizContent);
+  console.log('送信されました' + quizContent);
+})
 
 /**
  * Listen on provided port, on all network interfaces.
