@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 
 /**
@@ -22,16 +22,54 @@ app.set('port', port);
 const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
+const Quiz = require('../models/quiz');
+let chooseQuizId = 0;
+
+let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
   console.log('a user connected');
+  iCountUserQuiz = iCountUserQuiz+1;
+  chooseQuiz();
+  io.emit('chat message', '入室しました' , 'info' , iCountUserQuiz);
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
+    iCountUserQuiz = iCountUserQuiz - 1;
+    io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
   });
-  socket.on('chat message', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
+
+  socket.on('chat message', (msg, user) => {
+    console.log('message:' , msg , user , iCountUserQuiz);
+    io.emit('chat message' , msg, user , iCountUserQuiz);
   });
 });
+
+function chooseQuiz() {
+  if(iCountUserQuiz !== 0) {
+  Quiz.count().then(quizCount => {
+    chooseQuizId = Math.floor( Math.random() * quizCount + 1);
+    console.log(chooseQuizId);
+    Quiz.findOne({
+      where: {
+        quizId: chooseQuizId
+      },
+    }).then(quiz => {
+      res.json({
+        quiz: true,
+        quizName: quiz.quizName,
+        question: quiz.quizstion,
+        answer: quiz.answer,
+        createdBy: quiz.createdBy
+      });
+      setTimeout(30000 , chooseQuiz)
+    });
+  });
+  } else {
+    return res.json({
+      quiz: false,
+    });
+  }
+};
 
 /**
  * Listen on provided port, on all network interfaces.

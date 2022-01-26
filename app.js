@@ -9,23 +9,24 @@ const logoutRouter = require('./routes/logout');
 const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
+const config = require('./config');
 const app = express();
 
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
 const Chat = require('./models/chat');
 User.sync();
-Quiz.sync();
+Quiz.sync({alter: true});
 Chat.sync();
 
 const passport = require('passport');
 const session = require('express-session');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-
-const GITHUB_CLIENT_ID = 'c0a5237c0b048dde8ce7';
-const GITHUB_CLIENT_SECRET = 'cef8788b6631cee1f9200732b0356480cca545fa';
-const GITHUB_CALLBACKURL = 'http://localhost:8000/auth/github/callback';
 const GitHubStrategy = require('passport-github2').Strategy;
+
+const GITHUB_CLIENT_ID = config.github.clientKey;
+const GITHUB_CLIENT_SECRET = config.github.clientSecret;
+const GITHUB_CALLBACKURL = config.github.callbackURL;
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -35,9 +36,9 @@ passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
-const clientID = '48219968582-s2hu1s7rme9ej5os073tilv15e7nhei4.apps.googleusercontent.com'
-const clientSecret = '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'
-const callbackURL = 'http://localhost:8000/auth/google/callback'
+const clientID = config.google.clientKey;
+const clientSecret = config.google.clientSecret;
+const callbackURL = config.google.callbackURL;
 passport.use(new GoogleStrategy({
   clientID, clientSecret, callbackURL
 }, function (accessToken, refreshToken, profile, done) {
@@ -129,7 +130,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -140,6 +140,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', { user: req.user });
 });
-
 
 module.exports = app;
