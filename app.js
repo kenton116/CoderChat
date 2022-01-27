@@ -15,9 +15,9 @@ const app = express();
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
 const Chat = require('./models/chat');
-User.sync();
+User.sync({alter: true});
 Quiz.sync({alter: true});
-Chat.sync();
+Chat.sync({alter: true});
 
 const passport = require('passport');
 const session = require('express-session');

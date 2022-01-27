@@ -28,12 +28,14 @@ let quizContent;
 
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
+  socket.join('api');
   console.log('a user connected');
   iCountUserQuiz = iCountUserQuiz+1;
   chooseQuiz();
   io.emit('chat message', '入室しました' , 'info' , iCountUserQuiz);
 
   socket.on('disconnect', () => {
+    socket.leave('api');
     console.log('user disconnected');
     iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
@@ -44,6 +46,14 @@ io.on('connection', (socket) => {
     io.emit('chat message' , msg, user , iCountUserQuiz);
   });
 });
+
+function sleep(ms) {
+    return new Promise(function(resolve) { 
+        setTimeout(function() { 
+            resolve() 
+        }, ms)
+    })
+} 
 
 function chooseQuiz() {
   if(iCountUserQuiz !== 0) {
@@ -58,12 +68,16 @@ function chooseQuiz() {
       quizContent = [
         { quiz: true },
         { quizName: quiz.quizName },
-        { question: quiz.quizstion },
+        { question: quiz.question },
         { answer: quiz.answer },
         { createdBy: quiz.createdBy },
       ]
-      console.log('設定完了')
-      setTimeout(30000 , chooseQuiz)
+      io.to('api').emit('api',JSON.stringify(quizContent));
+      console.log('送信').then(() => {
+        sleep(30000);
+      }).then(() => {
+        return chooseQuiz();
+      })
     });
   });
   } else {
