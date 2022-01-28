@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 クイズルーム🚪
+  p クイズチャットの部屋です。
+  a(href="/dashboard") 退室
+  div
+    h2 クイズ
+    h3#timer
+    h2#quiz-name
+    p#quiz-by-username
+    h1#question
+    h1#answer
+  h2 チャット 
+  div#message
+  h3#user-count
+  form(action="")#form
+    input(autocomplete="off")#input
+    button 送信
+  div#system_text
+  input(type="hidden" name=`${user.username}` placeHolder="メッセージを入力")#username
+  script(defer, src="/javascripts/jquery-3.6.min.js") 
+  script(defer, src="/socket.io/socket.io.js")
+  script(defer, src="/javascripts/quiz-chat.js")

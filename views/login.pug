@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  if message
+    h3 #{message}
+  h1 🥳ログイン
+  p ようこそ、CoderChatへ　ログインして始めましょう！
+  a(href="/auth/google") Googleでログイン
+  br
+  a(href="/auth/github") Githubでログイン

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1 ダッシュボード
+  p お帰りなさい！ #{user.username} さん
+  a(href="/") CoderChat 
+  br
+  a(href="/logout") #{user.username} をログアウト
+  
+  h2 クイズを作る🗒
+  a(href="/quiz/new") 新規クイズを作成
+
+  h2 クイズ一覧💬
+  - var hasQuizzes = quizzes.length > 0
+  if hasQuizzes
+    table.table
+      tr
+        th クイズ名
+        th 更新日時
+      each quiz in quizzes
+        tr
+          td #{quiz.quizName}
+          td #{quiz.updatedAt}
+  else 
+    h3 作ったクイズがありません😢
+    a(href="quiz/new") 早速クイズを作りましょう！
+
+  h2 ルームに参加🚪
+  p オンラインクイズのチャットルーム
+  a(href="/room/quiz") クイズルームに入室
+  p 雑談や質問ができるチャットルーム
+  a(href="/room/chat") チャットルームに入室
