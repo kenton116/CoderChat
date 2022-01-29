@@ -17,7 +17,6 @@ router.get('/chat', authenticationEnsurer, (req, res, next) => {
 });
 
 router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
-  console.log(req.body);
   Quiz.increment('badReview', {
     where: {
       quizid: req.body.quizId

@@ -63,7 +63,7 @@ function chooseQuiz() {
       },
     }).then(quiz => {
       quizContent = [
-        { quizId: quiz.quizId },
+        { quizId: quiz.quizid },
         { quizName: quiz.quizName },
         { question: quiz.question },
         { answer: quiz.answer },
