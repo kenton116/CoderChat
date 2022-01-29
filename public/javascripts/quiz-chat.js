@@ -55,9 +55,9 @@ socket.on('api' , function(api) {
       dataType: 'json',
       data: { "reportId": data[0].quizId },
     }).done(function() {
-      alertMessage.innerText = "このクイズを報告しました。"
+      alertMessage.innerText = "このクイズを報告しました。";
     }).fail(function() {
-      alertMessage.innerText = "クイズを報告できませんでした。"
+      alertMessage.innerText = "クイズを報告できませんでした。";
     });
   });
 });

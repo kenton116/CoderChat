@@ -16,7 +16,7 @@ router.get('/chat', authenticationEnsurer, (req, res, next) => {
   res.render('chatroom', { user: req.user });
 });
 
-router.post( '/report', authenticationEnsurer, (req, res, next) => {
+router.post('/report', authenticationEnsurer, (req, res, next) => {
   console.log(JSON.parse(data))
   Quiz.increment('badReview', {
     where: {
