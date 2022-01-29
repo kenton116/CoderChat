@@ -31,14 +31,14 @@ socket.on('api' , function(api) {
   console.log('受け取り');
   const data = JSON.parse(api);
   console.log(data);
-  quizName.innerText = 'クイズ名' + data[0].quizName;
-  quizByUsername.innerText = '作成者' + data[3].creatUser;
-  question.innerText = '問題' + data[1].question;
+  quizName.innerText = 'クイズ名: ' + data[0].quizName;
+  quizByUsername.innerText = '作成者: ' + data[3].creatUser;
+  question.innerText = '問題: ' + data[1].question;
   function timerRoop() {
     for(let i = 30; 1 > i; i--) {
-      timer.innerText = i;
+      timer.innerText = '残り解答時間: ' + i;
     };    
   }
   timerRoop();
-  answer.innerText = '答え' + data[2].answer;
+  answer.innerText = '答え: ' + data[2].answer;
 })
