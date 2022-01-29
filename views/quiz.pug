@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 クイズ概要
+  p クイズID #{quiz.quizId}
+  h2 #{quiz.quizName}
+  p 作成者: #{quiz.createUser}
+  p 更新日時 #{quiz.updatedAt}
+  h3 問題:  #{quiz.question}
+  h3 答え: #{quiz.answer}
+  h3 タグ: #{quiz.tag}
+
+  - var isMine = user.id === quiz.createdBy
+  if isMine
+    div
+      a(href=`/quiz/${quiz.quizId}/edit`) このクイズを編集する

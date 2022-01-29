@@ -60,8 +60,9 @@ function chooseQuiz() {
     Quiz.findOne({
       where: {
         quizId: chooseQuizId
-      },
-    }).then(quiz => {
+      }
+    }).then((quiz) => {
+      console.log(quiz)
       quizContent = [
         { quizId: quiz.quizId },
         { quizName: quiz.quizName },

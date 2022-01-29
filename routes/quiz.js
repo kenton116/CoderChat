@@ -7,6 +7,7 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
+const config = require('../config');
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
@@ -14,15 +15,11 @@ router.get('/new', authenticationEnsurer, (req, res, next) => {
   res.render('new', { user: req.user });
 });
 
-router.get('/error', authenticationEnsurer, (req, res, next) => {
-  const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
-  next(err);
-});
-
 router.post('/', authenticationEnsurer, (req, res, next) => {
 
   if (req.body.quizName.length >= 255) {
-    return res.redirect('/quiz/error');
+    const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
+    next(err);
   }
 
   const date = dayjs()
@@ -77,7 +74,7 @@ router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
       quizId: req.params.quizId
     }
   }).then((quiz) => {
-    if (isMine(req, quiz)) { // 作成者のみが編集フォームを開ける
+    if (isMine(req, quiz) || isAdmin(req)) { // 作成者のみが編集フォームを開ける
       res.render('edit', {
         user: req.user,
         quiz: quiz,
@@ -96,10 +93,11 @@ router.post('/:quizId', authenticationEnsurer, (req, res, next) => {
       quizId: req.params.quizId
     }
   }).then((quiz) => {
-    if (quiz && isMine(req, quiz)) {
+    if (quiz && isMine(req, quiz) || isAdmin(req)) {
       if (parseInt(req.query.edit) === 1) {
         if (req.body.quizName.length >= 255) {
-          return res.redirect('/quiz/error');
+          const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
+          next(err);
         }
         const date = dayjs()
         .tz('Asia/Tokyo')
@@ -145,6 +143,12 @@ router.deleteQuizAggregate = deleteQuizAggregate;
 
 function isMine(req, quiz) {
   return quiz && parseInt(quiz.createdBy) === parseInt(req.user.id);
+}
+
+function isAdmin(req) {
+  console.log(config.google.admin)
+  console.log(config.github.admin)
+  return  config.github.admin === parseInt(req.user.id) || config.google.admin === parseInt(req.user.id);
 }
 
 module.exports = router;
