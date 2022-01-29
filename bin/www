@@ -75,7 +75,6 @@ function chooseQuiz() {
       const countDown = () => {
         i--;
         io.emit('timer' , i);
-        console.log(i)
         if(1 > i) {
           io.emit('timer' , '次の問題に移ります。');
           i = 30;

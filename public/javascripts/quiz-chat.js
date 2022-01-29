@@ -39,6 +39,7 @@ socket.on('api' , function(api) {
   quizName.innerText = 'クイズ名: ' + data[1].quizName;
   quizByUsername.innerText = '作成者: ' + data[4].creatUser;
   question.innerText = '問題: ' + data[2].question;
+  reportQuizId.value = data[0].quizId;
   answer.innerText = "";
   socket.on('timer' , function(t) {
     console.log('タイマー受け取り');
@@ -49,9 +50,5 @@ socket.on('api' , function(api) {
       question.innerText = '';
       answer.innerText = '答え: ' + data[3].answer;
     };
-  });
-  report.on('click' , function(e) {
-     reportQuizId.value = data[0].quizId;
-     return reportForm.submit();
   });
 });

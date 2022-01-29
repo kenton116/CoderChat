@@ -18,12 +18,14 @@ router.get('/chat', authenticationEnsurer, (req, res, next) => {
 
 router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
   console.log(req.body);
-  // Quiz.increment('badReview', {
-  //   where: {
-  //     quizid: req.body.reportQuizId
-  //   }}).then(() => {
-  //     res.redirect('/room/quiz');
-  //   });
+  Quiz.increment('badReview', {
+    where: {
+      quizid: req.body.quizId
+    }})
+    .then(() => {
+      Quiz.sequelize.close()
+      res.redirect('/room/quiz')
+    });
 });
 
 module.exports = router;
