@@ -4,7 +4,7 @@ const {sequelize, DataTypes} = require('./sequelize-loader');
 const Quiz = sequelize.define(
   'quiz',
   {
-    quizid: {
+    quizId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true

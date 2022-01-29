@@ -3,8 +3,7 @@ extends layout
 block content
   h1 エラー
   h3 何か問題が起こっているようです。
-  br
-  a(href="/help") ヘルプ
+  
   h2= message
   h3= error.status
   pre #{error.stack}

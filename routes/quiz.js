@@ -15,7 +15,7 @@ router.get('/new', authenticationEnsurer, (req, res, next) => {
 });
 
 router.get('/error', authenticationEnsurer, (req, res, next) => {
-  const err = new Error('クイズを作成できませんでした。もう一度作り直してください。');
+  const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
   next(err);
 });
 
@@ -31,7 +31,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
 
   console.log(date);
   console.log(req.body.tagvalue);
-  
+
   Quiz.create({
     quizName: req.body.quizName,  
     question: req.body.question,
@@ -42,11 +42,11 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     updatedAt: date,
     badReview: 0
   }).then((quiz) => {
-    return res.redirect('/quiz/' + quiz.quizid);
+    return res.redirect('/quiz/' + quiz.quizId);
   })
 });
 
-router.get('/:quizid', authenticationEnsurer, (req, res, next) => {
+router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
   Quiz.findOne({
     include: [
       {
@@ -54,7 +54,7 @@ router.get('/:quizid', authenticationEnsurer, (req, res, next) => {
         attributes: ['userId', 'username']
       }],
     where: {
-      quizid: req.params.quizid
+      quizId: req.params.quizId
     },
     order: [['updatedAt', 'DESC']]
   }).then((quiz) => {
@@ -64,11 +64,87 @@ router.get('/:quizid', authenticationEnsurer, (req, res, next) => {
         quiz: quiz
     });
     } else {
-      const err = new Error('指定された予定は見つかりません');
+      const err = new Error('指定されたクイズは見つかりません');
       err.status = 404;
       next(err);
     }
   });
 });
+
+router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
+  Quiz.findOne({
+    where: {
+      quizId: req.params.quizId
+    }
+  }).then((quiz) => {
+    if (isMine(req, quiz)) { // 作成者のみが編集フォームを開ける
+      res.render('edit', {
+        user: req.user,
+        quiz: quiz,
+    });
+    } else {
+      const err = new Error('指定されたクイズがない、または、編集する権限がありません');
+      err.status = 404;
+      next(err);
+    }
+  });
+});
+
+router.post('/:quizId', authenticationEnsurer, (req, res, next) => {
+  Quiz.findOne({
+    where: {
+      quizId: req.params.quizId
+    }
+  }).then((quiz) => {
+    if (quiz && isMine(req, quiz)) {
+      if (parseInt(req.query.edit) === 1) {
+        if (req.body.quizName.length >= 255) {
+          return res.redirect('/quiz/error');
+        }
+        const date = dayjs()
+        .tz('Asia/Tokyo')
+        .format('YYYY年MM月DD日 HH時mm分ss秒');
+
+        quiz.update({
+          quizId: quiz.quizId,
+          quizName: req.body.quizName,  
+          question: req.body.question,
+          answer: req.body.answer,
+          tag: req.body.tagvalue,
+          createdBy: req.user.id,
+          createUser: req.user.username,
+          updatedAt: date
+        }).then(() => {
+          res.redirect('/dashboard')
+        })
+      } else if (parseInt(req.query.delete) === 1) {
+          deleteQuizAggregate(req.params.quizId)
+          res.redirect('/dashboard'); 
+      } else {
+        const err = new Error('不正なリクエストです');
+        err.status = 400;
+        next(err);
+      }
+    } else {
+      const err = new Error('指定されたクイズがない、または、編集する権限がありません');
+      err.status = 404;
+      next(err);
+    }
+  });
+});
+
+function deleteQuizAggregate(quizId, done, err) {
+  Quiz.findOne({
+    where: { quizId: quizId }
+  }).then((quiz) => {
+    quiz.destroy();
+  });
+}
+
+router.deleteQuizAggregate = deleteQuizAggregate;
+
+function isMine(req, quiz) {
+  return quiz && parseInt(quiz.createdBy) === parseInt(req.user.id);
+}
 
 module.exports = router;

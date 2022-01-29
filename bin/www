@@ -59,11 +59,11 @@ function chooseQuiz() {
     console.log(chooseQuizId);
     Quiz.findOne({
       where: {
-        quizid: chooseQuizId
+        quizId: chooseQuizId
       },
     }).then(quiz => {
       quizContent = [
-        { quizId: quiz.quizid },
+        { quizId: quiz.quizId },
         { quizName: quiz.quizName },
         { question: quiz.question },
         { answer: quiz.answer },

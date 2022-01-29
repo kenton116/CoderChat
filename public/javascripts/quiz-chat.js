@@ -106,10 +106,8 @@ var quizByUsername = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#quiz-by-use
 var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#question').get(0);
 var answer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer').get(0);
 var timer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#timer').get(0);
-var report = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report');
 var alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alert-message').get(0);
 var reportQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-quiz-id');
-var reportForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-form').get(0);
 form.on('click', function (e) {
   e.preventDefault();
 
@@ -131,7 +129,7 @@ socket.on('api', function (api) {
   console.log(data);
   alertMessage.innerText = '';
   quizName.innerText = 'クイズ名: ' + data[1].quizName;
-  quizByUsername.innerText = '作成者: ' + data[4].creatUser;
+  quizByUsername.innerText = '作成者: ' + data[4].creatUser + '　タグ: ' + data[5].tag;
   question.innerText = '問題: ' + data[2].question;
   reportQuizId.val(data[0].quizId);
   answer.innerText = "";

@@ -19,7 +19,7 @@ router.get('/chat', authenticationEnsurer, (req, res, next) => {
 router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
   Quiz.increment('badReview', {
     where: {
-      quizid: req.body.quizId
+      quizId: req.body.quizId
     }})
     .then(() => {
       Quiz.sequelize.close()

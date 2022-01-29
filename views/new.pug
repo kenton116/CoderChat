@@ -16,60 +16,61 @@ block content
       input(type="text", name="answer" placeHolder="答えを入力...（必須）" size=30 required)
     div 
       h3 タグ
-      input(type="radio" name="tag" id="html-css-markdown" required)
+      input(type="radio" name="tag" value="html-css-markdown" required)
       span HTML/CSS/Markdown
       br
-      input(type="radio" name="tag" id="javascript" required)
+      input(type="radio" name="tag" value="javascript" required)
       span JavaScript 
       br
-      input(type="radio" name="tag" id="node-js" required)
+      input(type="radio" name="tag" value="node-js" required)
       span Node.js 
       br
-      input(type="radio" name="tag" id="python" required)
+      input(type="radio" name="tag" value="python" required)
       span Python
       br
-      input(type="radio" name="tag" id="java" required)
+      input(type="radio" name="tag" value="java" required)
       span Java
       br
-      input(type="radio" name="tag" id="c" required)
+      input(type="radio" name="tag" value="c" required)
       span C
       br 
-      input(type="radio" name="tag" id="c++" required)
+      input(type="radio" name="tag" value="c++" required)
       span C++
       br
-      input(type="radio" name="tag" id="c#" required)
+      input(type="radio" name="tag" value="c#" required)
       span C#
       br
-      input(type="radio" name="tag" id="ruby" required)
+      input(type="radio" name="tag" value="ruby" required)
       span Ruby
       br 
-      input(type="radio" name="tag" id="ruby-onrails" required)
+      input(type="radio" name="tag" value="ruby-onrails" required)
       span Ruby on Rails
       br 
-      input(type="radio" name="tag" id="go" required)
+      input(type="radio" name="tag" value="go" required)
       span Go
       br 
-      input(type="radio" name="tag" id="php" required)
+      input(type="radio" name="tag" value="php" required)
       span PHP
       br
-      input(type="radio" name="tag" id="laravel" required)
+      input(type="radio" name="tag" value="laravel" required)
       span Laravel
       br
-      input(type="radio" name="tag" id="git-github" required)
+      input(type="radio" name="tag" value="git-github" required)
       span Git/Github
       br 
-      input(type="radio" name="tag" id="linux" required)
+      input(type="radio" name="tag" value="linux" required)
       span Linux
       br
-      input(type="radio" name="tag" id="network" required)
+      input(type="radio" name="tag" value="network" required)
       span サーバー/ネットワーク
       br
-      input(type="radio" name="tag" id="database" required)
+      input(type="radio" name="tag" value="database" required)
       span データベース
       br
-      input(type="radio" name="tag" id="other" required)
+      input(type="radio" name="tag" value="other" required)
       span その他 （これを選択する場合は、「クイズの名前」に、言語などのtagの代わりとなるものを入力してください。）
       input(type="hidden" name="tagvalue" id="tag-value")
 
     button(type="submit") クイズを作る
+    script(src="../javascripts/jquery-3.6.0.js") 
     script(defer, src="../javascripts/form.js") 
