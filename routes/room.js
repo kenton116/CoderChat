@@ -21,7 +21,9 @@ router.post('/report', authenticationEnsurer, (req, res, next) => {
   Quiz.increment('badReview', {
     where: {
       quizid: reportId
-    }});
+    }}).then(() => {
+      res.json({ status: 'OK' , quizid: reportId});
+    })
 }
 );
 
