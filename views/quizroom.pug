@@ -14,9 +14,9 @@ block content
   h2 チャット 
   div#message
   h3#user-count
-  form(action="")#form
+  form(action="")
     input(autocomplete="off")#input
-    button 送信
+    button#form 送信
   div#system_text
   input(type="hidden" name=`${user.username}` placeHolder="メッセージを入力")#username
   script(defer, src="/javascripts/jquery-3.6.min.js") 

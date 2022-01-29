@@ -23,6 +23,7 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
+const { ipAddress } = require('../config');
 let chooseQuizId = 0;
 let quizContent;
 
@@ -62,35 +63,27 @@ function chooseQuiz() {
     console.log(chooseQuizId);
     Quiz.findOne({
       where: {
-        quizId: chooseQuizId
+        quizid: chooseQuizId
       },
     }).then(quiz => {
       quizContent = [
-        { quiz: true },
         { quizName: quiz.quizName },
         { question: quiz.question },
         { answer: quiz.answer },
-        { createdBy: quiz.createdBy },
+        { creatUser: quiz.createUser },
       ]
       io.to('api').emit('api',JSON.stringify(quizContent));
-      console.log('送信').then(() => {
+      console.log(JSON.stringify(quizContent));
+      console.log('送信')
         sleep(30000);
       }).then(() => {
         return chooseQuiz();
       })
     });
-  });
   } else {
-    return res.json({
-      quiz: false,
-    });
+    return io.to('api').emit('api','');
   }
 };
-
-app.get('/api/quiz', (req, res) => {
-  res.json(quizContent);
-  console.log('送信されました' + quizContent);
-})
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -4,7 +4,7 @@ const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
-  res.render('room', { uesr: req.user });
+  res.render('room', { user: req.user });
 });
 
 router.get('/quiz', authenticationEnsurer, (req, res, next) => {

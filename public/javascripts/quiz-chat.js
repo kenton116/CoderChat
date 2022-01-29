@@ -1,6 +1,6 @@
 'use strict'
 const socket = io();
-const form = $('#form').get(0);
+const form = $('#form');
 const messages = $('#message').get(0);
 const input = $('#input').get(0);
 const username = $('#username').attr('name');
@@ -11,7 +11,7 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 
-form.submit(function(e) {
+form.on('click',function(e) {
   e.preventDefault();
   if (input.value) {
     socket.emit('chat message', input.value, username);
@@ -28,13 +28,17 @@ socket.on('chat message', function(msg , user , userCount) {
 });
 
 socket.on('api' , function(api) {
-  console.log('受け取り')
-  const data = api;
-  quizName.innerText = data.quizName;
-  quizByUsername.innerText = data.createdBy;
-  question.innerText = data.question;
-  for(let i = 30; 1 > i; i--) {
-    timer.innerText = i;
+  console.log('受け取り');
+  const data = JSON.parse(api);
+  console.log(data);
+  quizName.innerText = 'クイズ名' + data[0].quizName;
+  quizByUsername.innerText = '作成者' + data[3].creatUser;
+  question.innerText = '問題' + data[1].question;
+  function timerRoop() {
+    for(let i = 30; 1 > i; i--) {
+      timer.innerText = i;
+    };    
   }
-  answer.innerText = data.answer;
+  timerRoop();
+  answer.innerText = '答え' + data[2].answer;
 })

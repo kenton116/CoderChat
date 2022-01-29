@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "dayjs": "^1.10.7",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "1.13.0",

@@ -26,8 +26,12 @@ const Quiz = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false
     }, 
+    createUser: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     badReview: {
