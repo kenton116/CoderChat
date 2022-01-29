@@ -6,6 +6,11 @@ html(lang='ja')
   body 
     header 
       h2 CoderChat
+      if (user)
+        a(href="/dashboard") ダッシュボード
+        a(href="/logout") #{user.username} をログアウト
+      else
+        a(href="/login") ログイン
     block content
     footer 
       p &copy; 2022 kenton116

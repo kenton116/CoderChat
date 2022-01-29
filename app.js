@@ -15,9 +15,12 @@ const app = express();
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
 const Chat = require('./models/chat');
-User.sync({alter: true});
-Quiz.sync({alter: true});
-Chat.sync({alter: true});
+(async () => {
+  await User.sync({alter: true});
+  Quiz.belongsTo(User, { foreignKey: 'user_id' });
+  await Quiz.sync({alter: true});
+  await Chat.sync({alter: true});
+})();
 
 const passport = require('passport');
 const session = require('express-session');

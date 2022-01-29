@@ -3,7 +3,6 @@ extends layout
 block content
   h1 ダッシュボード
   p お帰りなさい！ #{user.username} さん
-  a(href="/") CoderChat 
   br
   a(href="/logout") #{user.username} をログアウト
   
@@ -19,7 +18,8 @@ block content
         th 更新日時
       each quiz in quizzes
         tr
-          td #{quiz.quizName}
+          td
+            a(href=`/quiz/${quiz.quizid}`) #{quiz.quizName}
           td #{quiz.updatedAt}
   else 
     h3 作ったクイズがありません😢

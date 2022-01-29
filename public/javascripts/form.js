@@ -99,7 +99,7 @@ var form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#form').get(0);
 var tagValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tag-value').get(0);
 var radioNodeList = form.tag;
 var tag = radioNodeList.value;
-tagValue.value = tag;
+tagValue.val(tag);
 
 /***/ }),
 /* 1 */

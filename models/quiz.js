@@ -18,6 +18,10 @@ const Quiz = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false
     },
+    tag: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
     answer: {
       type: DataTypes.TEXT,
       allowNull: false

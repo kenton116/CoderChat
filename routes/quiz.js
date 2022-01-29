@@ -30,7 +30,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   .format('YYYY年MM月DD日 HH時mm分ss秒');
 
   console.log(date);
-
+  console.log(req.body.tagvalue);
+  
   Quiz.create({
     quizName: req.body.quizName,  
     question: req.body.question,
@@ -53,7 +54,7 @@ router.get('/:quizid', authenticationEnsurer, (req, res, next) => {
         attributes: ['userId', 'username']
       }],
     where: {
-      quizId: req.params.quizId
+      quizid: req.params.quizid
     },
     order: [['updatedAt', 'DESC']]
   }).then((quiz) => {
