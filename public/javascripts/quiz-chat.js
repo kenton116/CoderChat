@@ -11,6 +11,7 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const report = $('#report');
+const alertMessage = $('#alert-message').get(0);
 
 form.on('click',function(e) {
   e.preventDefault();
@@ -18,10 +19,6 @@ form.on('click',function(e) {
     socket.emit('chat message', input.value, username);
     input.value = '';
   }
-});
-
-report.on('click' , function(e) {
-  console.log('hello')
 });
 
 socket.on('chat message', function(msg , user , userCount) {
@@ -36,9 +33,10 @@ socket.on('api' , function(api) {
   console.log('受け取り');
   const data = JSON.parse(api);
   console.log(data);
-  quizName.innerText = 'クイズ名: ' + data[0].quizName;
-  quizByUsername.innerText = '作成者: ' + data[3].creatUser;
-  question.innerText = '問題: ' + data[1].question;
+  alertMessage.innerText = '';
+  quizName.innerText = 'クイズ名: ' + data[1].quizName;
+  quizByUsername.innerText = '作成者: ' + data[4].creatUser;
+  question.innerText = '問題: ' + data[2].question;
   answer.innerText = "";
   socket.on('timer' , function(t) {
     console.log('タイマー受け取り');
@@ -47,7 +45,19 @@ socket.on('api' , function(api) {
       quizName.innerText = '';
       quizByUsername.innerText = '';
       question.innerText = '';
-      answer.innerText = '答え: ' + data[2].answer;
-    }
-  })
-})
+      answer.innerText = '答え: ' + data[3].answer;
+    };
+  });
+  report.on('click' , function(e) {
+    $.ajax({
+      url: '/room/report',
+      type: 'POST',
+      dataType: 'json',
+      data: { "reportId": data[0].quizId },
+    }).done(function() {
+      alertMessage.innerText = "このクイズを報告しました。"
+    }).fail(function() {
+      alertMessage.innerText = "クイズを報告できませんでした。"
+    });
+  });
+});

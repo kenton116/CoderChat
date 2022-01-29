@@ -23,8 +23,6 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
-// const { emit } = require('process');
-// const { ipAddress } = require('../config');
 let chooseQuizId = 0;
 let quizContent;
 let i = 30;
@@ -46,7 +44,7 @@ io.on('connection', (socket) => {
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
     if(iCountUserQuiz === 0) {
       return i = 30;
-    }
+    };
   });
 
   socket.on('chat message', (msg, user) => {
@@ -65,11 +63,12 @@ function chooseQuiz() {
       },
     }).then(quiz => {
       quizContent = [
+        { quizId: quiz.quizId },
         { quizName: quiz.quizName },
         { question: quiz.question },
         { answer: quiz.answer },
         { creatUser: quiz.createUser },
-      ]
+      ];
       io.to('api').emit('api',JSON.stringify(quizContent));
       console.log(JSON.stringify(quizContent));
       console.log('送信')
@@ -79,6 +78,7 @@ function chooseQuiz() {
         console.log(i)
         if(1 > i) {
           io.emit('timer' , '次の問題に移ります。');
+          i = 30;
           return setTimeout(chooseQuiz , 3000);
         }
         if(iCountUserQuiz === 0) {
