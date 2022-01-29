@@ -12,6 +12,8 @@ const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const report = $('#report');
 const alertMessage = $('#alert-message').get(0);
+const reportQuizId = $('#report-quiz-id').get(0);
+const reportForm = $('#report-form').get(0);
 
 form.on('click',function(e) {
   e.preventDefault();
@@ -49,15 +51,7 @@ socket.on('api' , function(api) {
     };
   });
   report.on('click' , function(e) {
-    $.ajax({
-      url: '/room/report',
-      type: 'POST',
-      dataType: 'json',
-      data: { "reportId": data[0].quizId },
-    }).done(function() {
-      alertMessage.innerText = "このクイズを報告しました。";
-    }).fail(function() {
-      alertMessage.innerText = "クイズを報告できませんでした。";
-    });
+     reportQuizId.value = data[0].quizId;
+     return reportForm.submit();
   });
 });

@@ -16,15 +16,14 @@ router.get('/chat', authenticationEnsurer, (req, res, next) => {
   res.render('chatroom', { user: req.user });
 });
 
-router.post('/report', authenticationEnsurer, (req, res, next) => {
-  console.log(JSON.parse(data))
-  Quiz.increment('badReview', {
-    where: {
-      quizid: reportId
-    }}).then(() => {
-      res.json({ status: 'OK' , quizid: reportId});
-    })
-}
-);
+router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
+  console.log(req.body);
+  // Quiz.increment('badReview', {
+  //   where: {
+  //     quizid: req.body.reportQuizId
+  //   }}).then(() => {
+  //     res.redirect('/room/quiz');
+  //   });
+});
 
 module.exports = router;

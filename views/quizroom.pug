@@ -12,8 +12,10 @@ block content
     p#quiz-by-username
     h1#question
     h1#answer
-    button#report このクイズを報告
-  h2 チャット 
+    form(method="post" action="/room/quiz/report")#report-form
+      input(type="hidden" name="quizId")#report-quiz-id
+      button#report このクイズを報告
+  h2 チャット
   div#message
   h3#user-count
   form(action="")
