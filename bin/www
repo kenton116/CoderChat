@@ -27,13 +27,16 @@ const Quiz = require('../models/quiz');
 // const { ipAddress } = require('../config');
 let chooseQuizId = 0;
 let quizContent;
+let i = 30;
 
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
   socket.join('api');
   console.log('a user connected');
   iCountUserQuiz = iCountUserQuiz+1;
-  chooseQuiz();
+  if(iCountUserQuiz === 1) {
+    chooseQuiz();
+  }
   io.emit('chat message', '入室しました' , 'info' , iCountUserQuiz);
 
   socket.on('disconnect', () => {
@@ -41,6 +44,9 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
     iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
+    if(iCountUserQuiz === 0) {
+      return i = 30;
+    }
   });
 
   socket.on('chat message', (msg, user) => {
@@ -50,7 +56,6 @@ io.on('connection', (socket) => {
 });
 
 function chooseQuiz() {
-  if(iCountUserQuiz !== 0) {
   Quiz.count().then(quizCount => {
     chooseQuizId = Math.floor( Math.random() * quizCount + 1);
     console.log(chooseQuizId);
@@ -68,7 +73,6 @@ function chooseQuiz() {
       io.to('api').emit('api',JSON.stringify(quizContent));
       console.log(JSON.stringify(quizContent));
       console.log('送信')
-      let i = 30;
       const countDown = () => {
         i--;
         io.emit('timer' , i);
@@ -78,17 +82,14 @@ function chooseQuiz() {
           return setTimeout(chooseQuiz , 3000);
         }
         if(iCountUserQuiz === 0) {
-          return i = 0;
+          return i = 30;
+        } else {
+          setTimeout(countDown, 1000);
         }
-        setTimeout(countDown, 1000);
-      } 
+      }
       countDown();
       });
     });
-  } else {
-    io.emit('api','');
-    return io.emit('timer','');
-  }
 };
 
 /**
