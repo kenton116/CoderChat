@@ -68,6 +68,7 @@ function chooseQuiz() {
         { question: quiz.question },
         { answer: quiz.answer },
         { creatUser: quiz.createUser },
+        { tag: quiz.tag }
       ];
       io.to('api').emit('api',JSON.stringify(quizContent));
       console.log(JSON.stringify(quizContent));
