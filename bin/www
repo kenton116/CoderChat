@@ -23,7 +23,8 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
-const { ipAddress } = require('../config');
+// const { emit } = require('process');
+// const { ipAddress } = require('../config');
 let chooseQuizId = 0;
 let quizContent;
 
@@ -48,14 +49,6 @@ io.on('connection', (socket) => {
   });
 });
 
-function sleep(ms) {
-    return new Promise(function(resolve) { 
-        setTimeout(function() { 
-            resolve() 
-        }, ms)
-    })
-} 
-
 function chooseQuiz() {
   if(iCountUserQuiz !== 0) {
   Quiz.count().then(quizCount => {
@@ -75,13 +68,26 @@ function chooseQuiz() {
       io.to('api').emit('api',JSON.stringify(quizContent));
       console.log(JSON.stringify(quizContent));
       console.log('送信')
-        sleep(30000);
-      }).then(() => {
-        return chooseQuiz();
-      })
+      let i = 30;
+      const countDown = () => {
+        i--;
+        io.emit('timer' , i);
+        console.log(i)
+        if(1 > i) {
+          io.emit('timer' , '次の問題に移ります。');
+          return setTimeout(chooseQuiz , 3000);
+        }
+        if(iCountUserQuiz === 0) {
+          return i = 0;
+        }
+        setTimeout(countDown, 1000);
+      } 
+      countDown();
+      });
     });
   } else {
-    return io.to('api').emit('api','');
+    io.emit('api','');
+    return io.emit('timer','');
   }
 };
 

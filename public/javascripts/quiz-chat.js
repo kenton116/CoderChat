@@ -10,6 +10,7 @@ const quizByUsername = $('#quiz-by-username').get(0);
 const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
+const report = $('#report');
 
 form.on('click',function(e) {
   e.preventDefault();
@@ -17,6 +18,10 @@ form.on('click',function(e) {
     socket.emit('chat message', input.value, username);
     input.value = '';
   }
+});
+
+report.on('click' , function(e) {
+  console.log('hello')
 });
 
 socket.on('chat message', function(msg , user , userCount) {
@@ -34,11 +39,15 @@ socket.on('api' , function(api) {
   quizName.innerText = 'クイズ名: ' + data[0].quizName;
   quizByUsername.innerText = '作成者: ' + data[3].creatUser;
   question.innerText = '問題: ' + data[1].question;
-  function timerRoop() {
-    for(let i = 30; 1 > i; i--) {
-      timer.innerText = '残り解答時間: ' + i;
-    };    
-  }
-  timerRoop();
-  answer.innerText = '答え: ' + data[2].answer;
+  answer.innerText = "";
+  socket.on('timer' , function(t) {
+    console.log('タイマー受け取り');
+    timer.innerText = '残り解答時間: ' + t;
+    if(1 > t) {
+      quizName.innerText = '';
+      quizByUsername.innerText = '';
+      question.innerText = '';
+      answer.innerText = '答え: ' + data[2].answer;
+    }
+  })
 })
