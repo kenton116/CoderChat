@@ -1,3 +1,5 @@
 node_modules/
 config.js
 webpack.config.js
+public/javascripts/form.js
+public/javascripts/quiz-chat.js
