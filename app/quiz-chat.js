@@ -12,45 +12,54 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const alertMessage = $('#alert-message').get(0);
-const reportQuizId = $('#report-quiz-id');
+const reportQuizId = $('#report-star-quiz-id');
+const starQuizId = $('#star-quiz-id');
 const report = $('#report').get(0);
+const star = $('#star').get(0);
+const isAnswer = $('#is-answer').get(0);
 report.style.display = 'none';
+star.style.display = 'none';
 
 form.on('click',function(e) {
   e.preventDefault();
   if (input.value) {
-    socket.emit('chat message', input.value, username);
+    const isAnswerValue = isAnswer.value;
+    socket.emit('chat message', input.value, username, isAnswerValue);
     input.value = '';
   }
 });
 
-socket.on('chat message', function(msg , user , userCount) {
+socket.on('chat message', function(msg , user , userCount , isAnswer) {
   const item = document.createElement('p');
   item.className = 'message';
+  if(isAnswer) {
+    item.className = 'answer-message';
+  }
   item.innerText = user + ' : ' + msg;
-  messages.appendChild(item);
+  messages.prepend(item);
   userCountValue.innerText = '👤' + userCount + '人';
 });
 
 socket.on('api' , function(api) {
   const data = JSON.parse(api);
-  console.log(data);
   report.style.display = 'none';
+  star.style.display = 'none';
   alertMessage.innerText = '';
-  quizName.innerText = 'クイズ名: ' + data[1].quizName;
-  quizByUsername.innerText = '作成者: ' + data[4].createUser + '　タグ: ' + data[5].tag;
-  question.innerText = '問題: ' + data[2].question;
+  quizName.innerText = data[1].quizName;
+  quizByUsername.innerText = '👤 ' + data[4].createUser + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
+  question.innerText = 'Q. ' + data[2].question;
   reportQuizId.val(data[0].quizId);
+  starQuizId.val(data[0].quizId);
   answer.innerText = "";
+
   socket.on('timer' , function(t) {
-    console.log('タイマー受け取り');
-    timer.innerText = '残り解答時間: ' + t;
+    timer.innerText = '⏳ ' + t;
     if(1 > t) {
-      quizName.innerText = '';
-      quizByUsername.innerText = '';
       question.innerText = '';
       report.style.display = 'block';
-      answer.innerText = '答え: ' + data[3].answer;
+      star.style.display = 'block';
+      answer.innerText = 'A.  ' + data[3].answer;
     };
   });
 });
+

@@ -2,25 +2,34 @@ extends layout
 
 block content
   h1 クイズルーム🚪
+  h3 ページのリロードはしないでください。
   a(href="/dashboard").btn.btn-danger 退室
   div.quiz-div
     h2#alert-message 次のクイズから参加します。少しお待ちください。
     h3#timer
     h2#quiz-name
-    p#quiz-by-username
+    h4#quiz-by-username
+    hr
     h1#question
     h1#answer
     div#report
       form(method="post" action="/room/quiz/report")#report-form
-      input(type="hidden" name="quizId")#report-quiz-id
-      button(type="submit")#report.btn.btn-danger このクイズを報告
+        input(type="hidden" name="quizId")#report-quiz-id
+        button(type="submit").btn.btn-danger このクイズを報告
+    div#star
+      form(method="post" action="/room/quiz/star")#star-form
+        input(type="hidden" name="quizId")#star-quiz-id
+        button(type="submit").btn.btn-info ⭐️をつける
   h2 チャット
   hr
   div#message
   h3#user-count
   form(action="").chat
-    input(autocomplete="off")#input.form-control
-    button#form.btn.btn-info 送信
+    input(type="checkbox")#is-answer
+    label(for="isAnswer")  答えとして投稿する
+    div.chat-form
+      input(autocomplete="off")#input.form-control
+      button#form.btn.btn-info 送信
   div#system_text
   input(type="hidden" name=`${user.username}` placeHolder="メッセージを入力")#username
   script(defer, src="/socket.io/socket.io.js")

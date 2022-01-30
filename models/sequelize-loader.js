@@ -18,7 +18,7 @@ const sequelize = process.env.DATABASE_URL ?
   :
   // 開発環境
   new Sequelize(
-      'postgres://postgres:postgres@db/schedule_arranger',
+      'postgres://postgres:postgres@db/coderchat',
     {
       logging: false
     }

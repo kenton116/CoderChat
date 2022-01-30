@@ -35,7 +35,8 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
     createdBy: req.user.id,
     createUser: req.user.username,
     updatedAt: date,
-    badReview: 0
+    badReview: 0,
+    star: 0
   }).then((quiz) => {
     return res.redirect('/quiz/' + quiz.quizId);
   })

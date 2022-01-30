@@ -41,6 +41,10 @@ const Quiz = sequelize.define(
     badReview: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    star: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
   {

@@ -73,7 +73,7 @@ h1,h2,h3 {
   margin-right: 0;
 }
 
-.chat {
+.chat-form {
   display: flex;
 }
 
@@ -88,10 +88,6 @@ h1,h2,h3 {
   background-color: #eee;
 }
 
-.btn {
-  margin: 5px;
-}
-
 .quiz-div {
   background-color: #eee;
   padding: 30px;
@@ -99,4 +95,13 @@ h1,h2,h3 {
 
 .jumbotron {
   background-color: #bff5ff;
+}
+
+#message {
+  height: 200px;
+  overflow-y:scroll;
+}
+
+.answer-message {
+  background-color: #fefeef;
 }

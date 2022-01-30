@@ -15,12 +15,10 @@ const app = express();
 
 const User = require('./models/user');
 const Quiz = require('./models/quiz');
-const Chat = require('./models/chat');
 (async () => {
-  await User.sync({alter: true});
+  await User.sync({ alter: true });
   Quiz.belongsTo(User, { foreignKey: 'user_id' });
-  await Quiz.sync({alter: true});
-  await Chat.sync({alter: true});
+  await Quiz.sync({ alter: true });
 })();
 
 const passport = require('passport');
@@ -51,8 +49,7 @@ passport.use(new GoogleStrategy({
       userId: profile.id,
       username: profile.displayName
     }).then(() => {
-      console.info('データベース追加OK');
-      return done(null, { id:profile.id, username:profile.displayName });
+      return done(null, { id: profile.id, username: profile.displayName });
     });
   })
 }
@@ -69,7 +66,6 @@ passport.use(new GitHubStrategy({
         userId: profile.id,
         username: profile.username
       }).then(() => {
-        console.info('データベース追加OK');
         return done(null, profile);
       });
     });
@@ -78,7 +74,7 @@ passport.use(new GitHubStrategy({
 
 app.use(
   session({
-    secret: '2a95804fe4aa4b3d',
+    secret: config.session.secret2,
     resave: false,
     saveUninitialized: false
   })
@@ -88,41 +84,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/auth/google', passport.authenticate('google', {
-  scope: ['email','profile']
+  scope: ['email', 'profile']
 }));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function (req, res) {
-    var loginFrom = req.cookies.loginFrom;
-    // オープンリダイレクタ脆弱性対策
-    if (loginFrom &&
-      loginFrom.startsWith('/')) {
-      res.clearCookie('loginFrom');
-      res.redirect(loginFrom);
-    } else {
-      res.redirect('/');
-    }
-});
+    res.redirect('/dashboard');
+  });
 
 app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
   function (req, res) {
-});
+  });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    var loginFrom = req.cookies.loginFrom;
-    // オープンリダイレクタ脆弱性対策
-    if (loginFrom &&
-      loginFrom.startsWith('/')) {
-      res.clearCookie('loginFrom');
-      res.redirect(loginFrom);
-    } else {
-      res.redirect('/');
-    }
-});
+    res.redirect('/dashboard');
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -147,12 +127,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -25,7 +25,6 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
       });
     });
   } else {
-    console.info(req.user);
     res.render('quiz', { user: req.user });
   }
 });

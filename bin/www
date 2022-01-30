@@ -44,8 +44,8 @@ io.on('connection', (socket) => {
     };
   });
 
-  socket.on('chat message', (msg, user) => {
-    io.emit('chat message' , msg, user , iCountUserQuiz);
+  socket.on('chat message', (msg, user, isAnswer) => {
+    io.emit('chat message' , msg, user , iCountUserQuiz , isAnswer);
   });
 });
 
@@ -62,6 +62,7 @@ function chooseQuiz() {
         { question: quiz.question },
         { answer: quiz.answer },
         { createUser: quiz.createUser },
+        { star: quiz.star },
         { tag: quiz.tag }
       ];
       io.to('api').emit('api',JSON.stringify(quizContent));

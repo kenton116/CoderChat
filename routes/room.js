@@ -18,7 +18,21 @@ router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
       quizId: req.body.quizId
     }})
     .then(() => {
-      res.redirect('/room/quiz')
+      setTimeout(function(){
+        res.redirect('/room/quiz');
+      }, 1000);
+    });
+});
+
+router.post('/quiz/star', authenticationEnsurer, (req, res, next) => {
+  Quiz.increment('star', {
+    where: {
+      quizId: req.body.quizId
+    }})
+    .then(() => {
+      setTimeout(function(){
+        res.redirect('/room/quiz');
+      }, 1000);
     });
 });
 
