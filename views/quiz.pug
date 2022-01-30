@@ -10,7 +10,7 @@ block content
   h3 答え: #{quiz.answer}
   h3 タグ: #{quiz.tag}
 
-  - var isMine = user.id === quiz.createdBy
-  if isMine
+  - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle 
+  if isMineOrAdmin
     div
       a(href=`/quiz/${quiz.quizId}/edit`) このクイズを編集する

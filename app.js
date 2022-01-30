@@ -124,7 +124,7 @@ app.use('/quiz', quizRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/room', roomRouter);
 
-app.use(session({ secret: 'e55be81b307c1c09', resave: false, saveUninitialized: false }));
+app.use(session({ secret: config.session.secret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 

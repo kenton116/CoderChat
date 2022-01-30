@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Quiz = require('../models/quiz');
+const config = require('../config')
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   if (req.user) {
@@ -11,9 +12,16 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
       },
       order: [['updatedAt', 'DESC']]
     }).then(quizzes => {
-      res.render('dashboard', {
-        user: req.user,
-        quizzes: quizzes,
+      Quiz.findAll({
+        order: [['badReview', 'DESC']]
+      }).then((allQuiz) => {
+        res.render('dashboard', {
+          user: req.user,
+          quizzes: quizzes,
+          allQuiz: allQuiz,
+          adminGoogle: config.admin.google,
+          adminGithub: config.admin.github,
+        });
       });
     });
   } else {

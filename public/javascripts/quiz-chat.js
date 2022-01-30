@@ -124,9 +124,7 @@ socket.on('chat message', function (msg, user, userCount) {
   userCountValue.innerText = '👤' + userCount + '人';
 });
 socket.on('api', function (api) {
-  console.log('受け取り');
   var data = JSON.parse(api);
-  console.log(data);
   alertMessage.innerText = '';
   quizName.innerText = 'クイズ名: ' + data[1].quizName;
   quizByUsername.innerText = '作成者: ' + data[4].creatUser + '　タグ: ' + data[5].tag;
@@ -134,7 +132,6 @@ socket.on('api', function (api) {
   reportQuizId.val(data[0].quizId);
   answer.innerText = "";
   socket.on('timer', function (t) {
-    console.log('タイマー受け取り');
     timer.innerText = '残り解答時間: ' + t;
 
     if (1 > t) {

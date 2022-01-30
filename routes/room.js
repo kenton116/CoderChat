@@ -22,7 +22,6 @@ router.post('/quiz/report', authenticationEnsurer, (req, res, next) => {
       quizId: req.body.quizId
     }})
     .then(() => {
-      Quiz.sequelize.close()
       res.redirect('/room/quiz')
     });
 });

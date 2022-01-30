@@ -30,7 +30,6 @@ let i = 30;
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
   socket.join('api');
-  console.log('a user connected');
   iCountUserQuiz = iCountUserQuiz+1;
   if(iCountUserQuiz === 1) {
     chooseQuiz();
@@ -39,7 +38,6 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     socket.leave('api');
-    console.log('user disconnected');
     iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
     if(iCountUserQuiz === 0) {
@@ -48,7 +46,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (msg, user) => {
-    console.log('message:' , msg , user , iCountUserQuiz);
     io.emit('chat message' , msg, user , iCountUserQuiz);
   });
 });
@@ -56,13 +53,11 @@ io.on('connection', (socket) => {
 function chooseQuiz() {
   Quiz.count().then(quizCount => {
     chooseQuizId = Math.floor( Math.random() * quizCount + 1);
-    console.log(chooseQuizId);
     Quiz.findOne({
       where: {
         quizId: chooseQuizId
       }
     }).then((quiz) => {
-      console.log(quiz)
       quizContent = [
         { quizId: quiz.quizId },
         { quizName: quiz.quizName },
@@ -72,8 +67,6 @@ function chooseQuiz() {
         { tag: quiz.tag }
       ];
       io.to('api').emit('api',JSON.stringify(quizContent));
-      console.log(JSON.stringify(quizContent));
-      console.log('送信')
       const countDown = () => {
         i--;
         io.emit('timer' , i);

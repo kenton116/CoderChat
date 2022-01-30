@@ -26,9 +26,6 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   .tz('Asia/Tokyo')
   .format('YYYY年MM月DD日 HH時mm分ss秒');
 
-  console.log(date);
-  console.log(req.body.tagvalue);
-
   Quiz.create({
     quizName: req.body.quizName,  
     question: req.body.question,
@@ -58,7 +55,9 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
     if(quiz) {
       res.render('quiz', {
         user: req.user,
-        quiz: quiz
+        quiz: quiz,
+        adminGithub: config.admin.github,
+        adminGoogle: config.admin.google,
     });
     } else {
       const err = new Error('指定されたクイズは見つかりません');
@@ -74,7 +73,7 @@ router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
       quizId: req.params.quizId
     }
   }).then((quiz) => {
-    if (isMine(req, quiz) || isAdmin(req)) { // 作成者のみが編集フォームを開ける
+    if (isMine(req, quiz) || isAdmin(req)) {
       res.render('edit', {
         user: req.user,
         quiz: quiz,
@@ -109,9 +108,6 @@ router.post('/:quizId', authenticationEnsurer, (req, res, next) => {
           question: req.body.question,
           answer: req.body.answer,
           tag: req.body.tagvalue,
-          createdBy: req.user.id,
-          createUser: req.user.username,
-          updatedAt: date
         }).then(() => {
           res.redirect('/dashboard')
         })
@@ -146,9 +142,8 @@ function isMine(req, quiz) {
 }
 
 function isAdmin(req) {
-  console.log(config.google.admin)
-  console.log(config.github.admin)
-  return  config.github.admin === parseInt(req.user.id) || config.google.admin === parseInt(req.user.id);
+  const isAdmin =config.admin.google === req.user.id || config.admin.github === req.user.id;
+  return isAdmin;
 }
 
 module.exports = router;
