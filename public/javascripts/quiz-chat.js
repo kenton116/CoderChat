@@ -107,18 +107,21 @@ var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#question').get(0)
 var answer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer').get(0);
 var timer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#timer').get(0);
 var alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alert-message').get(0);
-var reportQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-star-quiz-id');
+var reportQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-quiz-id');
 var starQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#star-quiz-id');
 var report = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report').get(0);
 var star = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#star').get(0);
 var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer').get(0);
 report.style.display = 'none';
 star.style.display = 'none';
+var isAnswerValue = isAnswer.checked;
+console.log(isAnswerValue);
 form.on('click', function (e) {
   e.preventDefault();
 
   if (input.value) {
-    var isAnswerValue = isAnswer.value;
+    isAnswerValue = isAnswer.checked;
+    console.log(isAnswerValue);
     socket.emit('chat message', input.value, username, isAnswerValue);
     input.value = '';
   }
@@ -126,8 +129,9 @@ form.on('click', function (e) {
 socket.on('chat message', function (msg, user, userCount, isAnswer) {
   var item = document.createElement('p');
   item.className = 'message';
+  console.log(isAnswer);
 
-  if (isAnswer) {
+  if (isAnswer === true) {
     item.className = 'answer-message';
   }
 
@@ -153,7 +157,7 @@ socket.on('api', function (api) {
       question.innerText = '';
       report.style.display = 'block';
       star.style.display = 'block';
-      answer.innerText = 'A.  ' + data[3].answer;
+      answer.innerText = 'A.　' + data[3].answer;
     }
 
     ;

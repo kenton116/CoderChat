@@ -12,18 +12,21 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const alertMessage = $('#alert-message').get(0);
-const reportQuizId = $('#report-star-quiz-id');
+const reportQuizId = $('#report-quiz-id');
 const starQuizId = $('#star-quiz-id');
 const report = $('#report').get(0);
 const star = $('#star').get(0);
 const isAnswer = $('#is-answer').get(0);
 report.style.display = 'none';
 star.style.display = 'none';
+let isAnswerValue = isAnswer.checked;
+console.log(isAnswerValue)
 
 form.on('click',function(e) {
   e.preventDefault();
   if (input.value) {
-    const isAnswerValue = isAnswer.value;
+    isAnswerValue = isAnswer.checked;
+    console.log(isAnswerValue)
     socket.emit('chat message', input.value, username, isAnswerValue);
     input.value = '';
   }
@@ -32,7 +35,8 @@ form.on('click',function(e) {
 socket.on('chat message', function(msg , user , userCount , isAnswer) {
   const item = document.createElement('p');
   item.className = 'message';
-  if(isAnswer) {
+  console.log(isAnswer)
+  if(isAnswer === true) {
     item.className = 'answer-message';
   }
   item.innerText = user + ' : ' + msg;
@@ -58,8 +62,7 @@ socket.on('api' , function(api) {
       question.innerText = '';
       report.style.display = 'block';
       star.style.display = 'block';
-      answer.innerText = 'A.  ' + data[3].answer;
+      answer.innerText = 'A.　' + data[3].answer;
     };
   });
 });
-

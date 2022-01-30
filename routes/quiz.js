@@ -112,6 +112,7 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
           question: req.body.question,
           answer: req.body.answer,
           tag: req.body.tagvalue,
+          updatedAt: date
         }).then(() => {
           res.redirect('/dashboard')
         })
