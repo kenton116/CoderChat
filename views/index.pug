@@ -1,11 +1,6 @@
 extends layout
 
 block content
-  h1 会話して、学ぼう。💬
-  p リアルタイムチャットサービス CoderChat
-  if user
-    a(href="/dashboard") ダッシュボード
-    br
-    a(href="/logout") #{user.username} をログアウト
-  else
-    a(href="/login") ログイン
+  div.jumbotron.my-3 
+    h1.display-4 会話して、学ぼう。
+    p.lead リアルタイムチャットサービス CoderChat

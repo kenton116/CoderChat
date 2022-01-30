@@ -2,25 +2,25 @@ extends layout
 
 block content
   h1 クイズルーム🚪
-  p クイズチャットの部屋です。
-  a(href="/dashboard") 退室
-  div
-    h2 クイズ
+  a(href="/dashboard").btn.btn-danger 退室
+  div.quiz-div
     h2#alert-message 次のクイズから参加します。少しお待ちください。
     h3#timer
     h2#quiz-name
     p#quiz-by-username
     h1#question
     h1#answer
-  form(method="post" action="/room/quiz/report")#report-form
+    div#report
+      form(method="post" action="/room/quiz/report")#report-form
       input(type="hidden" name="quizId")#report-quiz-id
-      button(type="submit")#report このクイズを報告
+      button(type="submit")#report.btn.btn-danger このクイズを報告
   h2 チャット
+  hr
   div#message
   h3#user-count
-  form(action="")
-    input(autocomplete="off")#input
-    button#form 送信
+  form(action="").chat
+    input(autocomplete="off")#input.form-control
+    button#form.btn.btn-info 送信
   div#system_text
   input(type="hidden" name=`${user.username}` placeHolder="メッセージを入力")#username
   script(defer, src="/socket.io/socket.io.js")

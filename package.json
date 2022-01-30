@@ -7,7 +7,9 @@
     "test": "jest --testTimeout=10000 --forceExit"
   },
   "dependencies": {
+    "bootstrap": "4.0.0",
     "cookie-parser": "~1.4.3",
+    "csurf": "1.8.3",
     "dayjs": "^1.10.7",
     "debug": "~2.6.9",
     "express": "~4.16.0",
@@ -21,6 +23,7 @@
     "passport-google-oauth": "^2.0.0",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
+    "popper.js": "1.14.0",
     "pug": "2.0.0-beta11",
     "save": "^2.4.0",
     "sequelize": "6.5.0",
@@ -36,5 +39,8 @@
     "supertest": "3.1.0",
     "webpack": "4.26.1",
     "webpack-cli": "3.1.2"
-  }
+  },
+  "engines": {
+    "node": ">=14"
+   }
 }

@@ -23,7 +23,6 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
-let chooseQuizId = 0;
 let quizContent;
 let i = 30;
 
@@ -50,20 +49,19 @@ io.on('connection', (socket) => {
   });
 });
 
+const sequelize = require('sequelize'); 
+
 function chooseQuiz() {
-  Quiz.count().then(quizCount => {
-    chooseQuizId = Math.floor( Math.random() * quizCount + 1);
+  Quiz.count().then(() => {
     Quiz.findOne({
-      where: {
-        quizId: chooseQuizId
-      }
+      order: sequelize.literal('random()')
     }).then((quiz) => {
       quizContent = [
         { quizId: quiz.quizId },
         { quizName: quiz.quizName },
         { question: quiz.question },
         { answer: quiz.answer },
-        { creatUser: quiz.createUser },
+        { createUser: quiz.createUser },
         { tag: quiz.tag }
       ];
       io.to('api').emit('api',JSON.stringify(quizContent));
@@ -73,7 +71,7 @@ function chooseQuiz() {
         if(1 > i) {
           io.emit('timer' , '次の問題に移ります。');
           i = 30;
-          return setTimeout(chooseQuiz , 3000);
+          return setTimeout(chooseQuiz , 7000);
         }
         if(iCountUserQuiz === 0) {
           return i = 30;

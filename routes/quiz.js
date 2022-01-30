@@ -8,15 +8,16 @@ const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
 const config = require('../config');
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
-router.get('/new', authenticationEnsurer, (req, res, next) => {
-  res.render('new', { user: req.user });
+router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
+  res.render('new', { user: req.user, csrfToken: req.csrfToken() });
 });
 
-router.post('/', authenticationEnsurer, (req, res, next) => {
-
+router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   if (req.body.quizName.length >= 255) {
     const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
     next(err);
@@ -67,7 +68,7 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
+router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, next) => {
   Quiz.findOne({
     where: {
       quizId: req.params.quizId
@@ -77,6 +78,7 @@ router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
       res.render('edit', {
         user: req.user,
         quiz: quiz,
+        csrfToken: req.csrfToken()
     });
     } else {
       const err = new Error('指定されたクイズがない、または、編集する権限がありません');
@@ -86,7 +88,8 @@ router.get('/:quizId/edit', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.post('/:quizId', authenticationEnsurer, (req, res, next) => {
+router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) => {
+
   Quiz.findOne({
     where: {
       quizId: req.params.quizId

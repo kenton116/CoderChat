@@ -4,44 +4,51 @@ block content
   h1 ダッシュボード
   p お帰りなさい！ #{user.username} さん
   
-  h2 クイズを作る🗒
-  a(href="/quiz/new") 新規クイズを作成
+  div.quiz
+    div.create-quiz
+      h2.my-3 クイズを作る🗒
+      a(href="/quiz/new").btn.btn-info 新規クイズを作成
 
-  h2 クイズ一覧💬
-  - var hasQuizzes = quizzes.length > 0
-  if hasQuizzes
-    table.table
-      tr
-        th クイズ名
-        th 更新日時
-      each quiz in quizzes
+    div.join-room
+      h2.my-3 ルームに参加🚪
+      a(href="/room/quiz").btn.btn-info クイズルームに入室
+      //- p 雑談や質問ができるチャットルーム
+      //- a(href="/room/chat").btn.btn-info チャットルームに入室
+
+  div.quiz-list
+    h2.my-3 クイズ一覧💬
+    - var hasQuizzes = quizzes.length > 0
+    if hasQuizzes
+      table.table
         tr
-          td
-            a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-          td #{quiz.updatedAt}
-  else 
-    h3 作ったクイズがありません😢
-    a(href="quiz/new") 早速クイズを作りましょう！
+          th クイズ名
+          th 更新日時  
+        each quiz in quizzes
+          tr
+            td
+              a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+            td #{quiz.updatedAt}
+    else 
+      h4 作ったクイズがありません😢
+      a(href="quiz/new").btn.btn-info 早速クイズを作りましょう！
 
   - var isAdmin = user.id === adminGithub || user.id === adminGoogle 
   if isAdmin
-    h2 全てのクイズ [管理者機能]
-    each quiz in allQuiz
-      table.table
-          tr
-            th クイズ名
-            th 更新日時 
-            th 報告件数
-          tr 
-            td 
-              a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-            td #{quiz.updatedAt}
-            td #{quiz.badReview}
-            td 
-              a(href=`/quiz/${quiz.quizId}/edit`) 編集
+    div.all-quiz-list
+      h2.my-3 全てのクイズ [管理者機能]
+      each quiz in allQuiz
+        table.table
+            tr
+              th クイズ名
+              th 更新日時 
+              th 報告件数
+              th
+            tr 
+              td 
+                a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+              td #{quiz.updatedAt}
+              td #{quiz.badReview}
+              td 
+                a(href=`/quiz/${quiz.quizId}/edit`) 編集
 
-  h2 ルームに参加🚪
-  p オンラインクイズのチャットルーム
-  a(href="/room/quiz") クイズルームに入室
-  p 雑談や質問ができるチャットルーム
-  a(href="/room/chat") チャットルームに入室
+  

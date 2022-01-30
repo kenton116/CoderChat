@@ -1,0 +1,7 @@
+{
+  "name": "CoderChat",
+  "description": "会話して、学ぼう",
+  "logo": "",
+  "keywords": ["node"],
+  "image": "heroku/nodejs"
+}

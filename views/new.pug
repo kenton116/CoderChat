@@ -4,73 +4,74 @@ block content
   h1 クイズを作る
   h3 利用規約を守って作成してください。
   
-  form(method="post", action="/quiz" id="form")
-    div
+  form(method="post", action="/quiz" id="form").my-3
+    input(type="hidden" name="_csrf" value!=csrfToken)
+    div.form-group
       h3 クイズ名
       input(type="text" name="quizName" placeHolder="クイズの名前を入力...（必須）" size=30 required)
-    div
+    div.form-group
       h3 問題
       input(type="text" name="question" placeHolder="問題を入力...（必須）" size=30 required)
-    div 
+    div.form-group 
       h3 答え
       input(type="text", name="answer" placeHolder="答えを入力...（必須）" size=30 required)
-    div 
+    div.form-group 
       h3 タグ
       input(type="radio" name="tag" value="html-css-markdown" required)
-      span HTML/CSS/Markdown
+      span 　HTML/CSS/Markdown
       br
       input(type="radio" name="tag" value="javascript" required)
-      span JavaScript 
+      span 　JavaScript 
       br
       input(type="radio" name="tag" value="node-js" required)
-      span Node.js 
+      span 　Node.js 
       br
       input(type="radio" name="tag" value="python" required)
-      span Python
+      span 　Python
       br
       input(type="radio" name="tag" value="java" required)
-      span Java
+      span 　Java
       br
       input(type="radio" name="tag" value="c" required)
-      span C
+      span 　C
       br 
       input(type="radio" name="tag" value="c++" required)
-      span C++
+      span 　C++
       br
       input(type="radio" name="tag" value="c#" required)
-      span C#
+      span 　C#
       br
       input(type="radio" name="tag" value="ruby" required)
-      span Ruby
+      span 　Ruby
       br 
       input(type="radio" name="tag" value="ruby-onrails" required)
-      span Ruby on Rails
+      span 　Ruby on Rails
       br 
       input(type="radio" name="tag" value="go" required)
-      span Go
+      span 　Go
       br 
       input(type="radio" name="tag" value="php" required)
-      span PHP
+      span 　PHP
       br
       input(type="radio" name="tag" value="laravel" required)
-      span Laravel
+      span 　Laravel
       br
       input(type="radio" name="tag" value="git-github" required)
-      span Git/Github
+      span 　Git/Github
       br 
       input(type="radio" name="tag" value="linux" required)
-      span Linux
+      span 　Linux
       br
       input(type="radio" name="tag" value="network" required)
-      span サーバー/ネットワーク
+      span 　サーバー/ネットワーク
       br
       input(type="radio" name="tag" value="database" required)
-      span データベース
+      span 　データベース
       br
       input(type="radio" name="tag" value="other" required)
-      span その他 （これを選択する場合は、「クイズの名前」に、言語などのtagの代わりとなるものを入力してください。）
+      span 　その他 （これを選択する場合は、「クイズの名前」に、言語などのtagの代わりとなるものを入力してください。）
       input(type="hidden" name="tagvalue" id="tag-value")
 
-    button(type="submit") クイズを作る
+    button(type="submit").btn.btn-info クイズを作る
     script(src="../javascripts/jquery-3.6.0.js") 
     script(defer, src="../javascripts/form.js") 

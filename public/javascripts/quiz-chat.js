@@ -108,6 +108,8 @@ var answer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer').get(0);
 var timer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#timer').get(0);
 var alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alert-message').get(0);
 var reportQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-quiz-id');
+var report = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report').get(0);
+report.style.display = 'none';
 form.on('click', function (e) {
   e.preventDefault();
 
@@ -125,19 +127,23 @@ socket.on('chat message', function (msg, user, userCount) {
 });
 socket.on('api', function (api) {
   var data = JSON.parse(api);
+  console.log(data);
+  report.style.display = 'none';
   alertMessage.innerText = '';
   quizName.innerText = 'クイズ名: ' + data[1].quizName;
-  quizByUsername.innerText = '作成者: ' + data[4].creatUser + '　タグ: ' + data[5].tag;
+  quizByUsername.innerText = '作成者: ' + data[4].createUser + '　タグ: ' + data[5].tag;
   question.innerText = '問題: ' + data[2].question;
   reportQuizId.val(data[0].quizId);
   answer.innerText = "";
   socket.on('timer', function (t) {
+    console.log('タイマー受け取り');
     timer.innerText = '残り解答時間: ' + t;
 
     if (1 > t) {
       quizName.innerText = '';
       quizByUsername.innerText = '';
       question.innerText = '';
+      report.style.display = 'block';
       answer.innerText = '答え: ' + data[3].answer;
     }
 

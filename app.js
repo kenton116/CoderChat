@@ -9,6 +9,7 @@ const logoutRouter = require('./routes/logout');
 const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
+const docsRouter = require('./routes/docs');
 const config = require('./config');
 const app = express();
 
@@ -93,7 +94,15 @@ app.get('/auth/google', passport.authenticate('google', {
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function (req, res) {
-    res.redirect('/dashboard')
+    var loginFrom = req.cookies.loginFrom;
+    // オープンリダイレクタ脆弱性対策
+    if (loginFrom &&
+      loginFrom.startsWith('/')) {
+      res.clearCookie('loginFrom');
+      res.redirect(loginFrom);
+    } else {
+      res.redirect('/');
+    }
 });
 
 app.get('/auth/github',
@@ -104,7 +113,15 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect('/dashboard');
+    var loginFrom = req.cookies.loginFrom;
+    // オープンリダイレクタ脆弱性対策
+    if (loginFrom &&
+      loginFrom.startsWith('/')) {
+      res.clearCookie('loginFrom');
+      res.redirect(loginFrom);
+    } else {
+      res.redirect('/');
+    }
 });
 
 // view engine setup
@@ -123,6 +140,7 @@ app.use('/logout', logoutRouter);
 app.use('/quiz', quizRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/room', roomRouter);
+app.use('/docs', docsRouter);
 
 app.use(session({ secret: config.session.secret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());

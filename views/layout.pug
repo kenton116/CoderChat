@@ -1,16 +1,36 @@
 doctype html
 html(lang='ja')
   head
-    title CoderChat
+    title CoderChat - 会話して学ぼう
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(link rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300&display=swap" rel="stylesheet")
+    link(rel="stylesheet",
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm",
+    crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body 
     header 
-      h2 CoderChat
-      if (user)
-        a(href="/dashboard") ダッシュボード
-        a(href="/logout") #{user.username} をログアウト
-      else
-        a(href="/login") ログイン
+    nav
+      div.nav-header
+        a(href="/").title CoderChat
+        p 会話して学ぼう
+      div.nav-body
+        if (user)
+            a(href="/dashboard").btn.btn-info.nav-body-a ダッシュボード
+            a(href="/logout").btn.btn-info.nav-body-a #{user.username} をログアウト
+        else
+            a(href="/login").btn.btn-info.nav-body-a ログイン
     block content
     footer 
-      p &copy; 2022 kenton116
+      a(href="/").title CoderChat
+      div.footer 
+        a(href="https://github.com/kenton116/coderchat" target="_blank" rel="noopener noreferrer").footer-a Github 
+        a(href="/docs/site" target="_blank" rel="noopener noreferrer").footer-a このサイトについて
+        a(href="/docs/terms" target="_blank" rel="noopener noreferrer").footer-a 利用規約
+        a(href="/docs/policies" target="_blank" rel="noopener noreferrer").footer-a プライバシーポリシー
+        a(href="https://github.com/kenton116/CoderChat/discussions" target="_blank" rel="noopener noreferrer").footer-a お問い合わせ
+      a(href="https://kenton116.shop" target="_blank" rel="noopener noreferrer").copyright &copy; 2022 kenton116

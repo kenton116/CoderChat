@@ -1,8 +1,102 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 1%;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.nav-header {
+  display: flex;
+}
+
+nav {
+  display: flex;
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: #eafcff;
+}
+
+.nav-header p {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 30px;
+}
+
+.nav-body {
+  margin: 0 0 0 auto;
+}
+
+.nav-body-a,.footer-a {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5px;
+}
+
+footer {
+  background-color: #eee;
+  width: auto;
+  padding: 30px;
+  display: flex;
+}
+
+h1,h2,h3 {
+  font-weight: bold;
+}
+
+.title {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.quiz {
+  display: flex;
+}
+
+.create-quiz,.join-room {
+  width: 50%;
+}
+
+.create-quiz,.quiz-list,.all-quiz-list,.join-room {
+  padding: 10px;
+}
+
+.copyright,.title,.footer-a {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: black;
+}
+
+.footer {
+  margin: auto;
+  margin-right: 0;
+}
+
+.chat {
+  display: flex;
+}
+
+.error {
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 50%;
+  background-color: #eee;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.quiz-div {
+  background-color: #eee;
+  padding: 30px;
+}
+
+.jumbotron {
+  background-color: #bff5ff;
 }
