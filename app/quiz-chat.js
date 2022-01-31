@@ -67,8 +67,8 @@ socket.on('api' , (api) => {
   });
 });
 
-if (window.Performance) {
-  if (PerformanceNavigationTiming.type === 'reload') {
+if (window.performance) {
+  if (performance.navigation.type === 1) {
     socket.emit('reload' , 'reloaded');
   }
 }

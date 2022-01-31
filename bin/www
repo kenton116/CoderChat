@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
     if(iCountUserQuiz === 0) {
-      return i = 30;
+      return i = 60;
     };
   });
 
@@ -48,7 +48,8 @@ io.on('connection', (socket) => {
     io.emit('chat message' , msg, user , iCountUserQuiz , isAnswer);
   });
 
-  socket.on('reloarded', () => {
+  socket.on('reloaded', () => {
+    console.log(iCountUserQuiz)
     if(iCountUserQuiz === 1) {
       return i = 0;
     }
@@ -77,11 +78,11 @@ function chooseQuiz() {
         io.emit('timer' , i);
         if(1 > i) {
           io.emit('timer' , '次の問題に移ります。');
-          i = 30;
-          return setTimeout(chooseQuiz , 7000);
+          i = 60;
+          return setTimeout(chooseQuiz , 15000);
         }
         if(iCountUserQuiz === 0) {
-          return i = 30;
+          return i = 60;
         } else {
           setTimeout(countDown, 1000);
         }
