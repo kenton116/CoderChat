@@ -6,7 +6,7 @@ const Quiz = require('../models/quiz');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
-router.get('/quiz', authenticationEnsurer, (req, res, next) => {
+router.get('/quiz', authenticationEnsurer, csrfProtection,(req, res, next) => {
   res.render('quizroom', { 
     user: req.user,
     csrfToken: req.csrfToken()
@@ -32,7 +32,7 @@ router.post('/quiz/report', authenticationEnsurer, csrfProtection,(req, res, nex
     });
 });
 
-router.post('/quiz/star', authenticationEnsurer, (req, res, next) => {
+router.post('/quiz/star', authenticationEnsurer, csrfProtection,(req, res, next) => {
   Quiz.increment('star', {
     where: {
       quizId: req.body.quizId

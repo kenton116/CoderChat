@@ -4,8 +4,9 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const Quiz = require('../models/quiz');
 const config = require('../config')
 const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 
-router.get('/', authenticationEnsurer, (req, res, next) => {
+router.get('/', authenticationEnsurer, csrfProtection,(req, res, next) => {
   if (req.user) {
     Quiz.findAll({
       where: {
