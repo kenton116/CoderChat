@@ -12,7 +12,7 @@ block content
 
     div.join-room
       h2.my-3 ルームに参加🚪
-      p クイズを解きませんか？
+      p オンラインで学習しませんか？
       a(href="/room/quiz").btn.btn-info クイズルームに入室
       
   div.quiz-list
@@ -50,9 +50,6 @@ block content
             th ⭐️
             if isAdmin
               th 報告件数 
-            th 
-            th 
-            if isAdmin
               th
           each quiz in allQuiz
             tr 
@@ -63,18 +60,5 @@ block content
               td #{quiz.star}
               if isAdmin
                 td #{quiz.badReview}
-              td
-                div#report
-                  form(method="post" action="/quiz/report")#report-form
-                    input(type="hidden" name="_csrf" value!=csrfToken)
-                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#report-quiz-id
-                    button(type="submit").btn.btn-danger 報告
-              td
-                div#star
-                  form(method="post" action="/quiz/star")#star-form
-                    input(type="hidden" name="_csrf" value!=csrfToken)
-                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#star-quiz-id
-                    button(type="submit").btn.btn-info ⭐️
-              if isAdmin 
                 td 
                   a(href=`/quiz/${quiz.quizId}/edit`) 編集

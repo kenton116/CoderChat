@@ -23,6 +23,12 @@ const server = http.createServer(app);
 const socket = require('socket.io');
 const io = socket(server);
 const Quiz = require('../models/quiz');
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 let quizContent;
 let i = 30;
 
@@ -49,7 +55,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('reloaded', () => {
-    console.log(iCountUserQuiz)
     if(iCountUserQuiz === 1) {
       return i = 0;
     }
@@ -77,12 +82,12 @@ function chooseQuiz() {
         i--;
         io.emit('timer' , i);
         if(1 > i) {
-          io.emit('timer' , '次の問題に移ります。');
+          io.emit('timer' , '答え合わせタイム');
           i = 60;
           return setTimeout(chooseQuiz , 15000);
         }
         if(iCountUserQuiz === 0) {
-          return i = 60;
+          return i = 0;
         } else {
           setTimeout(countDown, 1000);
         }

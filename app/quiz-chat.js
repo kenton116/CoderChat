@@ -20,13 +20,11 @@ const isAnswer = $('#is-answer').get(0);
 report.style.display = 'none';
 star.style.display = 'none';
 let isAnswerValue = isAnswer.checked;
-console.log(isAnswerValue);
 
 form.on('click', (e) => {
   e.preventDefault();
   if (input.value) {
     isAnswerValue = isAnswer.checked;
-    console.log(isAnswerValue)
     socket.emit('chat message', input.value, username, isAnswerValue);
     input.value = '';
   }
@@ -35,7 +33,6 @@ form.on('click', (e) => {
 socket.on('chat message', (msg , user , userCount , isAnswer) => {
   const item = document.createElement('p');
   item.className = 'message';
-  console.log(isAnswer)
   if(isAnswer === true) {
     item.className = 'answer-message';
   }

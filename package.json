@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npx webpack & PORT=8000 node ./bin/www",
-    "test": "jest --testTimeout=10000 --forceExit"
+    "start": "npx webpack & PORT=8000 node ./bin/www"
   },
   "dependencies": {
     "bootstrap": "4.0.0",

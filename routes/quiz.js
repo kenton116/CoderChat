@@ -7,14 +7,17 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
 const config = require('../config');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
-dayjs.extend(utc)
-dayjs.extend(timezone)
 
 router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
-  res.render('new', { user: req.user, csrfToken: req.csrfToken() });
+  res.render('new', {
+    user: req.user,
+    csrfToken: req.csrfToken()
+  });
 });
 
 router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
@@ -130,26 +133,6 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
       next(err);
     }
   });
-});
-
-router.post('/report', authenticationEnsurer, csrfProtection,(req, res, next) => {
-  Quiz.increment('badReview', {
-    where: {
-      quizId: req.body.quizId
-    }})
-    .then(() => {
-      res.redirect('/dashboard');
-    });
-});
-
-router.post('/star', authenticationEnsurer, csrfProtection,(req, res, next) => {
-  Quiz.increment('star', {
-    where: {
-      quizId: req.body.quizId
-    }})
-    .then(() => {
-      res.redirect('/dashboard');
-    });
 });
 
 function deleteQuizAggregate(quizId, done, err) {

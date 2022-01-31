@@ -2,7 +2,6 @@ extends layout
 
 block content
   h1 クイズルーム🚪
-  h3 ページのリロードはしないでください。
   a(href="/dashboard").btn.btn-danger 退室
   div.quiz-div
     h2#alert-message 接続中です。少しお待ちください。
@@ -28,11 +27,10 @@ block content
   h3#user-count
   form(action="").chat
     input(type="checkbox")#is-answer
-    label(for="isAnswer")  答えとして投稿する
+    label(for="isAnswer") 答えとして投稿する
     div.chat-form
-      input(autocomplete="off")#input.form-control
+      input(autocomplete="off" placeHolder="チャットを入力...")#input.form-control
       button#form.btn.btn-info 送信
-  div#system_text
-  input(type="hidden" name=`${user.username}` placeHolder="メッセージを入力")#username
+      input(type="hidden" name=`${user.username}`)#username
   script(defer, src="/socket.io/socket.io.js")
   script(defer, src="/javascripts/quiz-chat.js")

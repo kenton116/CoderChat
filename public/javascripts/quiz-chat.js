@@ -115,13 +115,11 @@ var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer').get(0
 report.style.display = 'none';
 star.style.display = 'none';
 var isAnswerValue = isAnswer.checked;
-console.log(isAnswerValue);
 form.on('click', function (e) {
   e.preventDefault();
 
   if (input.value) {
     isAnswerValue = isAnswer.checked;
-    console.log(isAnswerValue);
     socket.emit('chat message', input.value, username, isAnswerValue);
     input.value = '';
   }
@@ -129,7 +127,6 @@ form.on('click', function (e) {
 socket.on('chat message', function (msg, user, userCount, isAnswer) {
   var item = document.createElement('p');
   item.className = 'message';
-  console.log(isAnswer);
 
   if (isAnswer === true) {
     item.className = 'answer-message';

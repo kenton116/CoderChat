@@ -1,14 +1,13 @@
 extends layout
 
 block content
+  h2 #{quiz.quizName}
+  h4 クイズID #{quiz.quizId}
   div.card.my-3 
-    div.card-header
-      h2 #{quiz.quizName}
-      h4 クイズID #{quiz.quizId}
     div.card-body
-      h3 問題:  #{quiz.question}
-      h3 答え: #{quiz.answer}
-      h3 タグ: #{quiz.tag}
+      h3 Q.  #{quiz.question}
+      h3 A.  #{quiz.answer}
+      h3 🏷  #{quiz.tag}
     div.card-footer 
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}

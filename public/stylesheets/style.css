@@ -154,3 +154,7 @@ h1,h2,h3 {
 .promotion img {
   border-radius: 10px;
 }
+
+.chat-btn {
+  margin-left: 1%;
+}
