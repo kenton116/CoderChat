@@ -1,5 +1,5 @@
-node_modules/
+# node_modules/
 config.js
-webpack.config.js
-public/javascripts/quiz-chat.js
-public/javascripts/jquery-3.6.0.js
+# webpack.config.js
+# public/javascripts/quiz-chat.js
+# public/javascripts/jquery-3.6.0.js
