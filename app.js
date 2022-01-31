@@ -10,7 +10,7 @@ const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
 const docsRouter = require('./routes/docs');
-const config = require('./config');
+// const config = require('./config');
 const app = express();
 
 const User = require('./models/user');

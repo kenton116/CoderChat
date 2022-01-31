@@ -9,7 +9,7 @@ const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
 dayjs.extend(utc)
 dayjs.extend(timezone)
-const config = require('../config');
+// const config = require('../config');
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
