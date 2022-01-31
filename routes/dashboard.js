@@ -3,6 +3,7 @@ const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Quiz = require('../models/quiz');
 const config = require('../config')
+const csrf = require('csurf');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   if (req.user) {
@@ -21,11 +22,15 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
           allQuiz: allQuiz,
           adminGoogle: config.admin.google,
           adminGithub: config.admin.github,
+          csrfToken: req.csrfToken()
         });
       });
     });
   } else {
-    res.render('quiz', { user: req.user });
+    res.render('quiz', { 
+      user: req.user,
+      csrfToken: req.csrfToken()
+     });
   }
 });
 

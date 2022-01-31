@@ -131,7 +131,7 @@ h1,h2,h3 {
 }
 
 .create-quiz-thumbnail,.star-report-thumbnail {
-  width: 75%;
+  width: 50%;
   margin-top: 10px;
   margin-left: 0;
   margin-right: auto;
@@ -141,7 +141,7 @@ h1,h2,h3 {
 }
 
 .play-quiz-thumbnail {
-  width: 75%;
+  width: 50%;
   margin-top: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -152,4 +152,10 @@ h1,h2,h3 {
 
 .promotion img {
   border-radius: 10px;
+}
+
+.all-quiz-list,.quiz-list {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
 }

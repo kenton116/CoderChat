@@ -20,9 +20,9 @@ const isAnswer = $('#is-answer').get(0);
 report.style.display = 'none';
 star.style.display = 'none';
 let isAnswerValue = isAnswer.checked;
-console.log(isAnswerValue)
+console.log(isAnswerValue);
 
-form.on('click',function(e) {
+form.on('click', (e) => {
   e.preventDefault();
   if (input.value) {
     isAnswerValue = isAnswer.checked;
@@ -32,7 +32,7 @@ form.on('click',function(e) {
   }
 });
 
-socket.on('chat message', function(msg , user , userCount , isAnswer) {
+socket.on('chat message', (msg , user , userCount , isAnswer) => {
   const item = document.createElement('p');
   item.className = 'message';
   console.log(isAnswer)
@@ -44,7 +44,7 @@ socket.on('chat message', function(msg , user , userCount , isAnswer) {
   userCountValue.innerText = '👤' + userCount + '人';
 });
 
-socket.on('api' , function(api) {
+socket.on('api' , (api) => {
   const data = JSON.parse(api);
   report.style.display = 'none';
   star.style.display = 'none';
@@ -56,7 +56,7 @@ socket.on('api' , function(api) {
   starQuizId.val(data[0].quizId);
   answer.innerText = "";
 
-  socket.on('timer' , function(t) {
+  socket.on('timer' , (t) => {
     timer.innerText = '⏳ ' + t;
     if(1 > t) {
       question.innerText = '';
@@ -66,3 +66,9 @@ socket.on('api' , function(api) {
     };
   });
 });
+
+if (window.Performance) {
+  if (PerformanceNavigationTiming.type === 'reload') {
+    socket.emit('reload' , 'reloaded');
+  }
+}

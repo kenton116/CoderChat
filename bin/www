@@ -47,6 +47,12 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg, user, isAnswer) => {
     io.emit('chat message' , msg, user , iCountUserQuiz , isAnswer);
   });
+
+  socket.on('reloarded', () => {
+    if(iCountUserQuiz === 1) {
+      return i = 0;
+    }
+  })
 });
 
 const sequelize = require('sequelize'); 

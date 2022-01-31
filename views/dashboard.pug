@@ -7,21 +7,24 @@ block content
   div.quiz
     div.create-quiz
       h2.my-3 クイズを作る🗒
+      p クイズを作ってみませんか？
       a(href="/quiz/new").btn.btn-info 新規クイズを作成
 
     div.join-room
       h2.my-3 ルームに参加🚪
+      p クイズを解きませんか？
       a(href="/room/quiz").btn.btn-info クイズルームに入室
       
   div.quiz-list
     h2.my-3 クイズ一覧💬
     - var hasQuizzes = quizzes.length > 0
-    if hasQuizzes
+    if(hasQuizzes)
+      p あなたが作ったクイズです！
       table.table
         tr
           th クイズ名
           th 更新日時  
-          th お気に入り数
+          th ⭐️
           th
         each quiz in quizzes
           tr
@@ -37,22 +40,41 @@ block content
       a(href="quiz/new").btn.btn-info 早速クイズを作りましょう！
 
   - var isAdmin = user.id === adminGithub || user.id === adminGoogle 
-  if isAdmin
     div.all-quiz-list
-      h2.my-3 全てのクイズ [管理者機能]
+      h2.my-3 みんなのクイズ
       table.table
           tr
             th クイズ名
+            th 作成者
             th 更新日時 
-            th お気に入り数
-            th 報告件数
-            th
+            th ⭐️
+            if isAdmin
+              th 報告件数 
+            th 
+            th 
+            if isAdmin
+              th
           each quiz in allQuiz
             tr 
               td 
                 a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+              td #{quiz.createUser}
               td #{quiz.updatedAt}
               td #{quiz.star}
-              td #{quiz.badReview}
-              td 
-                a(href=`/quiz/${quiz.quizId}/edit`) 編集
+              if isAdmin
+                td #{quiz.badReview}
+              td
+                div#report
+                  form(method="post" action="/quiz/report")#report-form
+                    input(type="hidden" name="_csrf" value!=csrfToken)
+                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#report-quiz-id
+                    button(type="submit").btn.btn-danger 報告
+              td
+                div#star
+                  form(method="post" action="/quiz/star")#star-form
+                    input(type="hidden" name="_csrf" value!=csrfToken)
+                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#star-quiz-id
+                    button(type="submit").btn.btn-info ⭐️
+              if isAdmin 
+                td 
+                  a(href=`/quiz/${quiz.quizId}/edit`) 編集

@@ -132,6 +132,26 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
   });
 });
 
+router.post('/report', authenticationEnsurer, csrfProtection,(req, res, next) => {
+  Quiz.increment('badReview', {
+    where: {
+      quizId: req.body.quizId
+    }})
+    .then(() => {
+      res.redirect('/dashboard');
+    });
+});
+
+router.post('/star', authenticationEnsurer, csrfProtection,(req, res, next) => {
+  Quiz.increment('star', {
+    where: {
+      quizId: req.body.quizId
+    }})
+    .then(() => {
+      res.redirect('/dashboard');
+    });
+});
+
 function deleteQuizAggregate(quizId, done, err) {
   Quiz.findOne({
     where: { quizId: quizId }

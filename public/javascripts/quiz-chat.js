@@ -164,6 +164,12 @@ socket.on('api', function (api) {
   });
 });
 
+if (window.Performance) {
+  if (PerformanceNavigationTiming.type === 'reload') {
+    socket.emit('reload', 'reloaded');
+  }
+}
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
