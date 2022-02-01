@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Quiz = require('../models/quiz');
-// const config = require('../config');
+if(process.env.PORT === 8000) {
+  const config = require('../config');
+}
 
 router.get('/', authenticationEnsurer,(req, res, next) => {
   if (req.user) {

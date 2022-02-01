@@ -10,7 +10,9 @@ const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
 const docsRouter = require('./routes/docs');
-// const config = require('./config');
+if(process.env.PORT === 8000) {
+  const config = require('./config');
+}
 const app = express();
 
 const User = require('./models/user');
@@ -37,6 +39,8 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
+
+// Google認証は本番環境でうまく動かない
 
 // const clientID = process.env.GOOGLE_ID || config.google.clientKey;
 // const clientSecret = process.env.GOOGLE_SECRET || config.google.clientSecret;
