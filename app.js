@@ -10,7 +10,7 @@ const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
 const docsRouter = require('./routes/docs');
-const config = require('./config');
+const config = require('./config-local');
 const app = express();
 
 const User = require('./models/user');
@@ -26,9 +26,9 @@ const session = require('express-session');
 // const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const GitHubStrategy = require('passport-github2').Strategy;
 
-const GITHUB_CLIENT_ID = config.github.clientKey;
-const GITHUB_CLIENT_SECRET = config.github.clientSecret;
-const GITHUB_CALLBACKURL = config.github.callbackURL;
+const GITHUB_CLIENT_ID = process.env.GITHUB_ID || config.github.clientKey;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || config.github.clientSecret;
+const GITHUB_CALLBACKURL = process.env.GITHUB_CALLBACKURL || config.github.callbackURL;
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -40,9 +40,9 @@ passport.deserializeUser(function (obj, done) {
 
 // Google認証は本番環境でうまく動かない
 
-// const clientID = config.google.clientKey;
-// const clientSecret = config.google.clientSecret;
-// const callbackURL = config.google.callbackURL;
+// const clientID = process.env.GOOGLE_ID || config.google.clientKey;
+// const clientSecret = process.env.GOOGLE_SECRET || config.google.clientSecret;
+// const callbackURL = process.env.GOOGLE_CALLBACK || config.google.callbackURL;
 // passport.use(new GoogleStrategy({
 //   clientID, clientSecret, callbackURL
 // }, function (accessToken, refreshToken, profile, done) {
@@ -76,7 +76,7 @@ passport.use(new GitHubStrategy({
 
 app.use(
   session({
-    secret: config.session.secret2,
+    secret: process.env.SECRET2 || config.session.secret2,
     resave: false,
     saveUninitialized: false
   })
@@ -125,7 +125,7 @@ app.use('/room', roomRouter);
 app.use('/docs', docsRouter);
 
 app.use(session({
-  secret: config.session.secret,
+  secret: process.env.SECRET || config.session.secret,
   resave: false,
   saveUninitialized: false
 }));
