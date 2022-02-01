@@ -20,7 +20,7 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
           quizzes: quizzes,
           allQuiz: allQuiz,
           // adminGoogle: process.env.ADMIN_GOOGLE || config.admin.google,
-          adminGithub: process.env.ADMIN_GITHUB || config.admin.github,
+          adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
         });
       });
     });
