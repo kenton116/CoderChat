@@ -68,7 +68,6 @@ passport.use(new GitHubStrategy({
         userId: profile.id,
         username: profile.username
       }).then(() => {
-        console.log("データベースOK")
         return done(null, profile);
       });
     });
