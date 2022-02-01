@@ -1,4 +1,4 @@
 node_modules/
-config.js
 *.log
 public/javascripts/quiz-chat.js
+config-local.js

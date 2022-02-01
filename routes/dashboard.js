@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Quiz = require('../models/quiz');
-if(process.env.PORT === 8000) {
-  const config = require('../config');
-}
+const config = require('../config');
 
 router.get('/', authenticationEnsurer,(req, res, next) => {
   if (req.user) {
@@ -21,8 +19,8 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
           user: req.user,
           quizzes: quizzes,
           allQuiz: allQuiz,
-          // adminGoogle: process.env.ADMIN_GOOGLE || config.admin.google,
-          adminGithub: process.env.ADMIN_GITHUB || config.admin.github,
+          // adminGoogle: config.admin.google,
+          adminGithub: config.admin.github,
         });
       });
     });

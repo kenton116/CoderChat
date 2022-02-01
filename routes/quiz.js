@@ -9,9 +9,8 @@ const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
 dayjs.extend(utc)
 dayjs.extend(timezone)
-if(process.env.PORT === 8000) {
-  const config = require('../config');
-}
+const config = require('../config');
+
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
@@ -63,8 +62,8 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
       res.render('quiz', {
         user: req.user,
         quiz: quiz,
-        adminGithub: process.env.ADMIN_GITHUB || config.admin.github,
-        // adminGoogle: process.env.ADMIN_GOOGLE || config.admin.google,
+        adminGithub: config.admin.github,
+        // adminGoogle: config.admin.google,
     });
     } else {
       const err = new Error('指定されたクイズは見つかりません');
@@ -152,7 +151,7 @@ function isMine(req, quiz) {
 }
 
 function isAdmin(req) {
-  const isAdmin = /*(process.env.ADMIN_GOOGLE || config.admin.google === req.user.id) || */(process.env.ADMIN_GITHUB ||config.admin.github === req.user.id);
+  const isAdmin = /*(config.admin.google === req.user.id) || */(config.admin.github === req.user.id);
   return isAdmin;
 }
 
