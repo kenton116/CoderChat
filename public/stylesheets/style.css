@@ -77,17 +77,6 @@ h1,h2,h3 {
   display: flex;
 }
 
-.error {
-  padding: 20px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 50%;
-  background-color: #eee;
-}
-
 .quiz-div {
   background-color: #eee;
   padding: 30px;
