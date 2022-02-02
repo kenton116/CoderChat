@@ -39,8 +39,7 @@ block content
       h4 作ったクイズがありません😢
       a(href="quiz/new").btn.btn-info 早速クイズを作りましょう！
 
-  - var isAdmin = user.id === adminGithub
-    //- || user.id === adminGoogle 
+  - var isAdmin = user.id === adminGithub || user.id === adminGoogle 
     div.all-quiz-list
       h2.my-3 みんなのクイズ
       table.table

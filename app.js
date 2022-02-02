@@ -23,7 +23,7 @@ const Quiz = require('./models/quiz');
 
 const passport = require('passport');
 const session = require('express-session');
-// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_ID /*|| config.github.clientKey*/;
@@ -38,24 +38,22 @@ passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
-// Google認証は本番環境でうまく動かない
-
-// const clientID = process.env.GOOGLE_ID || config.google.clientKey;
-// const clientSecret = process.env.GOOGLE_SECRET || config.google.clientSecret;
-// const callbackURL = process.env.GOOGLE_CALLBACK || config.google.callbackURL;
-// passport.use(new GoogleStrategy({
-//   clientID, clientSecret, callbackURL
-// }, function (accessToken, refreshToken, profile, done) {
-//   process.nextTick(function () {
-//     User.upsert({
-//       userId: profile.id,
-//       username: profile.displayName
-//     }).then(() => {
-//       return done(null, { id: profile.id, username: profile.displayName });
-//     });
-//   })
-// }
-// ));
+const clientID = process.env.GOOGLE_ID /*|| config.google.clientKey*/;
+const clientSecret = process.env.GOOGLE_SECRET /*|| config.google.clientSecret*/;
+const callbackURL = process.env.GOOGLE_CALLBACK /*|| config.google.callbackURL*/;
+passport.use(new GoogleStrategy({
+  clientID, clientSecret, callbackURL
+}, function (accessToken, refreshToken, profile, done) {
+  process.nextTick(function () {
+    User.upsert({
+      userId: profile.id,
+      username: profile.displayName
+    }).then(() => {
+      return done(null, { id: profile.id, username: profile.displayName });
+    });
+  })
+}
+));
 
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
@@ -85,15 +83,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get('/auth/google', passport.authenticate('google', {
-//   scope: ['email', 'profile']
-// }));
+app.get('/auth/google', passport.authenticate('google', {
+  scope: ['email', 'profile']
+}));
 
-// app.get('/auth/google/callback',
-//   passport.authenticate('google', { failureRedirect: '/auth/google' }),
-//   function (req, res) {
-//     res.redirect('/dashboard');
-//   });
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
+  function (req, res) {
+    res.redirect('/dashboard');
+  });
 
 app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
