@@ -62,7 +62,7 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
       res.render('quiz', {
         user: req.user,
         quiz: quiz,
-        adminGithub: process.env.ADMIN_GITHUB || config.admin.github,
+        adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
         // adminGoogle: process.env.ADMIN_GOOGLE || config.admin.google,
     });
     } else {
