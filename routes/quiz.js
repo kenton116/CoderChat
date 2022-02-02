@@ -151,7 +151,7 @@ function isMine(req, quiz) {
 }
 
 function isAdmin(req) {
-  const isAdmin = (process.env.ADMIN_GOOGLE /*|| config.admin.google === req.user.id) || */(process.env.ADMIN_GITHUB /*|| config.admin.github === req.user.id*/);
+  const isAdmin = (process.env.ADMIN_GOOGLE /*|| config.admin.google === req.user.id*/) /*|| (process.env.ADMIN_GITHUB /*|| config.admin.github === req.user.id)*/;
   return isAdmin;
 }
 
