@@ -93,7 +93,6 @@ router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, ne
 });
 
 router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) => {
-
   Quiz.findOne({
     where: {
       quizId: req.params.quizId
@@ -150,7 +149,7 @@ function isMine(req, quiz) {
 }
 
 function isAdmin(req) {
-  const isAdmin = (process.env.ADMIN_GOOGLE /*|| config.admin.google === req.user.id*/) || (process.env.ADMIN_GITHUB /*|| config.admin.github === req.user.id*/);
+  const isAdmin = (process.env.ADMIN_GOOGLE /*|| config.admin.google*/ === req.user.id) || (process.env.ADMIN_GITHUB /*|| config.admin.github*/ === req.user.id);
   return isAdmin;
 }
 
