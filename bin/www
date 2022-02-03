@@ -30,7 +30,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 let quizContent;
-let i = 30;
+let i = 60;
 
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {

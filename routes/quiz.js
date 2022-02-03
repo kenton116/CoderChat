@@ -48,11 +48,10 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
 
 router.get('/:quizId',(req, res, next) => {
   Quiz.findOne({
-    include: [
-      {
-        model: User,
-        attributes: ['userId', 'username']
-      }],
+    include: [{
+      model: User,
+      attributes: ['userId', 'username']
+    }],
     where: {
       quizId: req.params.quizId
     },
@@ -63,7 +62,7 @@ router.get('/:quizId',(req, res, next) => {
         quiz: quiz,
         adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
         adminGoogle: process.env.ADMIN_GOOGLE /*|| config.admin.google*/,
-      })
+      });
     } else {
       const err = new Error('指定されたクイズは見つかりません');
       err.status = 404;
