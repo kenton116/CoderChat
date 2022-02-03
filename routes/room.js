@@ -26,7 +26,7 @@ router.post('/quiz/report', authenticationEnsurer, csrfProtection,(req, res, nex
     .then(() => {
       setTimeout(() => {
         res.redirect('/room/quiz');
-      }, 1000);
+      }, 100);
     });
 });
 
@@ -38,7 +38,7 @@ router.post('/quiz/star', authenticationEnsurer, csrfProtection,(req, res, next)
     .then(() => {
       setTimeout(() => {
         res.redirect('/room/quiz');
-      }, 1000);
+      }, 100);
     });
 });
 

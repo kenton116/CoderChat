@@ -46,7 +46,7 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   })
 });
 
-router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
+router.get('/:quizId',(req, res, next) => {
   Quiz.findOne({
     include: [
       {
@@ -56,7 +56,6 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
     where: {
       quizId: req.params.quizId
     },
-    order: [['updatedAt', 'DESC']]
   }).then((quiz) => {
     if(quiz) {
       res.render('quiz', {
@@ -64,7 +63,7 @@ router.get('/:quizId', authenticationEnsurer, (req, res, next) => {
         quiz: quiz,
         adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
         adminGoogle: process.env.ADMIN_GOOGLE /*|| config.admin.google*/,
-    });
+      })
     } else {
       const err = new Error('指定されたクイズは見つかりません');
       err.status = 404;
@@ -84,7 +83,7 @@ router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, ne
         user: req.user,
         quiz: quiz,
         csrfToken: req.csrfToken()
-    });
+      });
     } else {
       const err = new Error('指定されたクイズがない、または、編集する権限がありません');
       err.status = 404;
@@ -93,7 +92,8 @@ router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, ne
   });
 });
 
-router.post('/:quizId', authenticationEnsurer,(req, res, next) => {
+router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) => {
+
   Quiz.findOne({
     where: {
       quizId: req.params.quizId
