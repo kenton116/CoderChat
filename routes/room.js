@@ -24,9 +24,7 @@ router.post('/quiz/report', authenticationEnsurer, csrfProtection,(req, res, nex
       quizId: req.body.quizId
     }})
     .then(() => {
-      setTimeout(() => {
-        res.redirect('/room/quiz');
-      }, 100);
+      res.redirect('/room/quiz');
     });
 });
 
@@ -36,9 +34,7 @@ router.post('/quiz/star', authenticationEnsurer, csrfProtection,(req, res, next)
       quizId: req.body.quizId
     }})
     .then(() => {
-      setTimeout(() => {
-        res.redirect('/room/quiz');
-      }, 100);
+      res.redirect('/room/quiz');
     });
 });
 
