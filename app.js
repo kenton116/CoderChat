@@ -27,7 +27,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_ID /*|| config.github.clientKey*/;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET /*|| config.github.clientSecret*/;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_SECRET /*|| config.github.clientSecret*/;
 const GITHUB_CALLBACKURL = process.env.GITHUB_CALLBACK /*|| config.github.callbackURL*/;
 
 passport.serializeUser(function (user, done) {
