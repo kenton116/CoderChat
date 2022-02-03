@@ -8,7 +8,7 @@ block content
       h3 Q.  #{quiz.question}
       h3 A.  #{quiz.answer}
       h3 🏷  #{quiz.tag}
-    div.card-footer 
+    div.card-footer
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
       - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle */

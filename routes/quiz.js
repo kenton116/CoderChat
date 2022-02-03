@@ -93,8 +93,7 @@ router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, ne
   });
 });
 
-router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) => {
-
+router.post('/:quizId', authenticationEnsurer,(req, res, next) => {
   Quiz.findOne({
     where: {
       quizId: req.params.quizId
