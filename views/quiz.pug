@@ -11,7 +11,7 @@ block content
     div.card-footer
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
-      - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle */
+      - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle
       if isMineOrAdmin
         div
           a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-info このクイズを編集する
