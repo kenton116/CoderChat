@@ -96,6 +96,7 @@ app.get('/auth/google/callback',
 app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
   function (req, res) {
+    res.redirect('/dashboard');
   });
 
 app.get('/auth/github/callback',
