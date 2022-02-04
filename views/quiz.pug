@@ -15,13 +15,3 @@ block content
       if isMineOrAdmin
         div
           a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-info このクイズを編集する
-      div#report
-        form(method="post" action="/room/quiz/report")#report-form
-          input(type="hidden" name="_csrf" value!=csrfToken)
-          input(type="hidden" name="quizId" value=`${quiz.quizId}`)#report-quiz-id
-          button(type="submit").btn.btn-danger このクイズを報告
-      div#star
-        form(method="post" action="/room/quiz/star")#star-form
-          input(type="hidden" name="_csrf" value!=csrfToken)
-          input(type="hidden" name="quizId" value=`${quiz.quizId}`)#star-quiz-id
-          button(type="submit").btn.btn-info ⭐️をつける
