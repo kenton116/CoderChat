@@ -62,7 +62,6 @@ router.get('/:quizId',(req, res, next) => {
         quiz: quiz,
         adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
         adminGoogle: process.env.ADMIN_GOOGLE /*|| config.admin.google*/,
-        csrfToken: req.csrfToken()
       });
     } else {
       const err = new Error('指定されたクイズは見つかりません');
