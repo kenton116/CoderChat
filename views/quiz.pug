@@ -9,7 +9,7 @@ block content
       h3 A.  #{quiz.answer}
       h3 🏷  #{quiz.tag}
     div.card-footer
-      p ⭐️: #{quiz.star}
+      p お気に入り #{quiz.star} 個獲得！
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
       - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle
