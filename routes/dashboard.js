@@ -13,7 +13,7 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
       order: [['updatedAt', 'DESC']]
     }).then(quizzes => {
       Quiz.findAll({
-        order: [['badReview', 'DESC']]
+        order: [['star', 'DESC']]
       }).then((allQuiz) => {
         res.render('dashboard', {
           user: req.user,
