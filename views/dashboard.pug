@@ -48,6 +48,8 @@ block content
             th 作成者
             th 更新日時 
             th ⭐️
+            th 
+            th 
             if isAdmin
               th 報告件数 
               th
@@ -58,6 +60,19 @@ block content
               td #{quiz.createUser}
               td #{quiz.updatedAt}
               td #{quiz.star}
+              td 
+                div#report
+                  form(method="post" action="/room/quiz/report")#report-form
+                    input(type="hidden" name="_csrf" value!=csrfToken)
+                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#report-quiz-id
+                    button(type="submit").btn.btn-danger このクイズを報告
+              td
+                div#star
+                  form(method="post" action="/room/quiz/star")#star-form
+                    input(type="hidden" name="_csrf" value!=csrfToken)
+                    input(type="hidden" name="quizId" value=`${quiz.quizId}`)#star-quiz-id
+                    button(type="submit").btn.btn-info ⭐️をつける
+
               if isAdmin
                 td #{quiz.badReview}
                 td 
