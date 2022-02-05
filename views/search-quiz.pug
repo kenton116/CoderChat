@@ -22,3 +22,7 @@ block content
               a(href=`/quiz/${quiz.quizId}/edit`) 編集
     else 
       h4 クイズが見つかりませんでした
+
+  form(method="post" action="/quiz/search").form#search
+    input(type="search" name="search" placeHolder="検索内容を入力").form-control
+    button(type="submit").btn.btn-info 検索

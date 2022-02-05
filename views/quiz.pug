@@ -18,3 +18,7 @@ block content
       if isMineOrAdmin
         div
           a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-info このクイズを編集する
+          
+  form(method="post" action="/quiz/search").form#search
+    input(type="search" name="search" placeHolder="検索内容を入力").form-control
+    button(type="submit").btn.btn-info 検索
