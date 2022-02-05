@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  h1 #{user.nickname}
-  p #{user.nickname} さんのユーザーページです。
+  h1 #{user.username}
+  p #{user.username} さんのユーザーページです。
 
   div.quiz-list
-    h2.my-3 #{user.nickname} さんのクイズ一覧💬
+    h2.my-3 #{user.username} さんのクイズ一覧💬
     - var hasQuizzes = quizzes.length > 0
     if(hasQuizzes)
       table.table

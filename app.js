@@ -49,7 +49,6 @@ passport.use(new GoogleStrategy({
     User.upsert({
       userId: profile.id,
       username: profile.displayName,
-      nickname: profile.displayName
     }).then(() => {
       return done(null, { id: profile.id, username: profile.displayName });
     });
@@ -67,7 +66,6 @@ passport.use(new GitHubStrategy({
       User.upsert({
         userId: profile.id,
         username: profile.username,
-        nickname: profile.username
       }).then(() => {
         return done(null, profile);
       });
