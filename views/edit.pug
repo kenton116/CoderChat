@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1.my-3 クイズの編集
-  h3 利用規約を守って編集してください。
+  p 利用規約を守って編集してください。
   
   form(method="post", action=`/quiz/${quiz.quizId}?edit=1` id="form")
     input(type="hidden" name="_csrf" value!=csrfToken)
