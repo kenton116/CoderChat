@@ -1,5 +1,4 @@
 'use strict';
-const { DATE } = require('sequelize/types');
 const {sequelize, DataTypes} = require('./sequelize-loader');
 
 const User = sequelize.define(
