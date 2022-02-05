@@ -99,10 +99,6 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
   }).then((quiz) => {
     if (quiz && (isMine(req, quiz) || isAdmin(req))) {
       if (parseInt(req.query.edit) === 1) {
-        if (req.body.quizname.length >= 255) {
-          const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
-          next(err);
-        }
         const date = dayjs()
         .tz('Asia/Tokyo')
         .format('YYYY年MM月DD日 HH時mm分ss秒');

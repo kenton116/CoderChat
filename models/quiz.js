@@ -10,7 +10,7 @@ const Quiz = sequelize.define(
       primaryKey: true
     },
     quizName: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       primaryKey: true,
       allowNull: false
     },
