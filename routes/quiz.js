@@ -24,12 +24,12 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 router.post('/search/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   Quiz.findAll({
     where: {
-      tag: req.body.tag
+      tag: req.body.search
     },
     order: [['star', 'DESC']]
   }).then(quizzes => {
       res.render('search-quiz', {
-        tag: req.body.tag,
+        tag: req.body.search,
         quizzes: quizzes,
       });
     });

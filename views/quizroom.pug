@@ -28,7 +28,7 @@ block content
   form(action="").chat
     input(type="checkbox")#is-answer
     label(for="isAnswer") 答えとして投稿する
-    div.chat-form
+    div.form
       input(autocomplete="off" placeHolder="チャットを入力...")#input.form-control
       button#form.btn.btn-info 送信
       input(type="hidden" name=`${user.username}`)#username
