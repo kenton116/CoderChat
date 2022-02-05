@@ -22,7 +22,7 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 });
 
 router.post('/search/', authenticationEnsurer, (req, res, next) => {
-  Quiz.findAll({
+  Quiz.increment({
     where: {
       tag: req.body.search
     },
