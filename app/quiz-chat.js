@@ -34,7 +34,7 @@ socket.on('chat message', (msg , user , userCount , isAnswer) => {
   const item = document.createElement('p');
   item.className = 'message';
   if(isAnswer === true) {
-    item.className = 'answer-message';
+    item.classList.add = 'answer-message';
   }
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);

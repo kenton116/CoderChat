@@ -148,7 +148,7 @@ h1,h2,h3 {
   margin-left: 1%;
 }
 
-.message,.answer-message {
+.message {
   position: relative;
   display: block;
   margin: 1.5em auto;
@@ -166,7 +166,7 @@ h1,h2,h3 {
   animation: fadeIn 1s 0.9s ease forwards;
 }
 
-.message:before,.answer-message:before {
+.message:before {
   content: "";
   position: absolute;
   bottom: -24px;
@@ -177,7 +177,7 @@ h1,h2,h3 {
   z-index: 2;
 }
 
-.message:after,.answer-message:after {
+.message:after {
   content: "";
   position: absolute;
   bottom: -30px;
