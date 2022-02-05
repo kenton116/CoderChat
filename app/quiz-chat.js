@@ -30,11 +30,12 @@ form.on('click', (e) => {
   }
 });
 
-socket.on('chat message', (msg , user , userCount , isAnswer) => {
+socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   const item = document.createElement('p');
   item.classList.add = 'message';
-  if(isAnswer === true) {
+  if(isAnswerMessage === true) {
     item.classList.add = 'answer-message';
+    isAnswer.checked = false
   }
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
