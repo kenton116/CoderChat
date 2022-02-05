@@ -22,8 +22,8 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 });
 
 router.post('/search/', authenticationEnsurer, (req, res, next) => {
-  Quiz.include({
-    where: {
+  Quiz.findAll({
+    include: {
       tag: req.body.search
     },
     order: [['star', 'DESC']]
