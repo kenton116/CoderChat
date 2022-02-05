@@ -6,7 +6,9 @@ block content
   div.card.my-3 
     div.card-body
       h3 Q.  #{quiz.question}
-      h3 A.  #{quiz.answer}
+      button#answer-button.btn.btn-info
+      div.answer
+        h3 A.  #{quiz.answer}
       h3 🏷  #{quiz.tag}
     div.card-footer
       p ⭐️お気に入り #{quiz.star} 個獲得！
@@ -16,3 +18,5 @@ block content
       if isMineOrAdmin
         div
           a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-info このクイズを編集する
+  script(src="/javascripts/jquery-3.6.0.js") 
+  script(src="/javascripts/answer.js") 

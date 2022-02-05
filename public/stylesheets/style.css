@@ -148,6 +148,14 @@ h1,h2,h3 {
   margin-left: 1%;
 }
 
+.answer {
+  filter: blur(6px);
+}
+
+#answer-button:active + .answer{
+  filter: none;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
