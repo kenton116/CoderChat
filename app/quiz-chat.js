@@ -35,7 +35,6 @@ socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   item.classList.add = 'message';
   if(isAnswerMessage === true) {
     item.classList.add = 'answer-message';
-    isAnswer.checked = false
   }
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
