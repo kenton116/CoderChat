@@ -32,7 +32,7 @@ form.on('click', (e) => {
 
 socket.on('chat message', (msg , user , userCount , isAnswer) => {
   const item = document.createElement('p');
-  item.className = 'message';
+  item.classList.add = 'message';
   if(isAnswer === true) {
     item.classList.add = 'answer-message';
   }

@@ -30,7 +30,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 let quizContent;
-let i = 60;
+let i = 30;
 
 let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
     iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
     if(iCountUserQuiz === 0) {
-      return i = 60;
+      return i = 30;
     };
   });
 
@@ -83,7 +83,7 @@ function chooseQuiz() {
         io.emit('timer' , i);
         if(1 > i) {
           io.emit('timer' , '答え合わせタイム');
-          i = 60;
+          i = 30;
           return setTimeout(chooseQuiz , 15000);
         }
         if(iCountUserQuiz === 0) {

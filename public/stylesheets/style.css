@@ -148,46 +148,6 @@ h1,h2,h3 {
   margin-left: 1%;
 }
 
-.message {
-  position: relative;
-  display: block;
-  margin: 1.5em auto;
-  padding: 10px 10px;
-  width: 300px;
-  min-width: 120px;
-  max-width: 100%;
-  color: var(--font-blue);
-  font-size: 16px;
-  background: var(--white);
-  border: solid 3px var(--font-blue);
-  border-radius: 10px;
-  box-sizing: border-box;
-  opacity: 0;
-  animation: fadeIn 1s 0.9s ease forwards;
-}
-
-.message:before {
-  content: "";
-  position: absolute;
-  bottom: -24px;
-  left: 20%;
-  margin-left: -16px;
-  border: 13px solid transparent;
-  border-top: 13px solid var(--white);
-  z-index: 2;
-}
-
-.message:after {
-  content: "";
-  position: absolute;
-  bottom: -30px;
-  left: 20%;
-  margin-left: -17px;
-  border: 14px solid transparent;
-  border-top: 14px solid var(--font-blue);
-  z-index: 1;
-}
-
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
