@@ -6,9 +6,9 @@ block content
   
   form(method="post", action=`/quiz/${quiz.quizId}?edit=1` id="form")
     input(type="hidden" name="_csrf" value!=csrfToken)
-    div
+    div.form-group
       h3 クイズ名
-      input(type="text" name="quizName" placeHolder="クイズの名前を入力...（必須）" value=`${quiz.quizName}` size=30 required )
+      input(type="text" name="quizName" placeHolder="クイズの名前を入力...（必須）" value=`${quiz.quizName}` size=30 required ).form-group
     div.form-group
       h3 問題
       input(type="text" name="question" placeHolder="問題を入力...（必須）" value=`${quiz.question}` size=30 required).form-group
@@ -67,6 +67,9 @@ block content
       br
       input(type="radio" name="tag" value="database" required)
       span 　データベース
+      br
+      input(type="radio" name="tag" value=" security" required)
+      span セキュリティ
       br
       input(type="radio" name="tag" value="other" required)
       span 　その他 （これを選択する場合は、「クイズの名前」に、言語などのtagの代わりとなるものを入力してください。）

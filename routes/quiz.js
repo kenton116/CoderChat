@@ -97,7 +97,7 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
       quizId: req.params.quizId
     }
   }).then((quiz) => {
-    if (quiz && isMine(req, quiz) || isAdmin(req)) {
+    if (quiz && (isMine(req, quiz) || isAdmin(req))) {
       if (parseInt(req.query.edit) === 1) {
         if (req.body.quizName.length >= 255) {
           const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
