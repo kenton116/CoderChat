@@ -6,14 +6,14 @@ block content
 
   div.quiz-list
     h2.my-3 #{user.username} さんのクイズ一覧💬
-    - var hasQuizzes = quiz.length > 0
+    - var hasQuizzes = quizzes.length > 0
     if(hasQuizzes)
       table.table
         tr
           th クイズ名
           th 更新日時  
           th ⭐️
-        each quiz in quiz
+        each quiz in quizzes
           tr
             td
               a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
