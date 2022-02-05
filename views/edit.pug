@@ -80,5 +80,5 @@ block content
   form(method="post", action=`/quiz/${quiz.quizId}?delete=1`)
     input(type="hidden" name="_csrf" value!=csrfToken)
     button(type="submit").btn.btn-danger このクイズを削除する
-    script(src="/javascripts/jquery-3.6.0.js") 
-    script(defer, src="/javascripts/form.js")
+  script(src="/javascripts/jquery-3.6.0.js") 
+  script(defer, src="/javascripts/form.js")
