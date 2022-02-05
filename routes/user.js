@@ -5,14 +5,14 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const User = require('../models/user');
 const Quiz = require('../models/quiz')
 
-router.get('/:userId',authenticationEnsurer,(req, res, next) => {
+router.get('/:userId', authenticationEnsurer,(req, res, next) => {
   User.findOne({
     where: {
       userId: req.params.userId
     }
   }).then((user) => {
     Quiz.findAll({
-      whre: {
+      where: {
         createdBy: user.userId
       },
       order: [['star','DESC']]
