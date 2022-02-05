@@ -21,15 +21,15 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
   });
 });
 
-router.post('/search/:tag', authenticationEnsurer, csrfProtection, (req, res, next) => {
+router.post('/search/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   Quiz.findAll({
     where: {
-      tag: req.params.tag
+      tag: req.body.tag
     },
     order: [['star', 'DESC']]
   }).then(quizzes => {
       res.render('search-quiz', {
-        tag: req.params.tag,
+        tag: req.body.tag,
         quizzes: quizzes,
       });
     });
