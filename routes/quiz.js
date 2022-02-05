@@ -115,17 +115,16 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
 
         quiz.update({
           quizId: quiz.quizId,
-          quizName: req.body.quizname,
           question: req.body.question,
           answer: req.body.answer,
           tag: req.body.tagvalue,
           updatedAt: date
         }).then(() => {
-          res.redirect('/dashboard')
+          res.redirect('/quiz/' + quiz.quizId)
         })
       } else if (parseInt(req.query.delete) === 1) {
           deleteQuizAggregate(req.params.quizId)
-          res.redirect('/dashboard'); 
+          res.redirect('/quiz/' + quiz.quizId); 
       } else {
         const err = new Error('不正なリクエストです');
         err.status = 400;
