@@ -17,7 +17,7 @@ block content
       a(href="/room/quiz").btn.btn-info クイズルームに入室
       
   div.quiz-list
-    h2.my-3 クイズ一覧💬
+    h2.my-3 あなたのクイズ👤
     - var hasQuizzes = quizzes.length > 0
     if(hasQuizzes)
       p あなたが作ったクイズです！
@@ -37,11 +37,14 @@ block content
               a(href=`/quiz/${quiz.quizId}/edit`) 編集
     else 
       h4 作ったクイズがありません😢
-      a(href="quiz/new").btn.btn-info 早速クイズを作りましょう！
+      p 早速クイズを作りましょう！
 
   - var isAdmin = user.id === adminGithub || user.id === adminGoogle 
     div.all-quiz-list
-      h2.my-3 みんなのクイズ（人気順）
+      h2.my-3 みんなのクイズ👥
+      form(method="post" action="/quiz/search")#search
+        input(type="search" name="search" placeHolder="検索内容を入力").form-control
+        button(type="submit").btn.btn-info 検索
       table.table
           tr
             th クイズ名

@@ -21,6 +21,20 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
   });
 });
 
+router.post('/search/:tag', authenticationEnsurer, csrfProtection, (req, res, next) => {
+  Quiz.findAll({
+    where: {
+      tag: req.params.tag
+    },
+    order: [['star', 'DESC']]
+  }).then(quizzes => {
+      res.render('search-quiz', {
+        tag: req.params.tag,
+        quizzes: quizzes,
+      });
+    });
+});
+
 router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   const date = dayjs()
   .tz('Asia/Tokyo')
