@@ -3,7 +3,7 @@ extends layout
 block content
   h1 ダッシュボード
   p お帰りなさい！ #{user.username} さん
-  a(href="/user/edit") 
+  a(href=`/user/${user.userId}`) マイページ
   
   div.quiz
     div.create-quiz
