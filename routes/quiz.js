@@ -22,7 +22,7 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 });
 
 router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
-  if (req.body.name.length >= 255) {
+  if (req.body.quizName.length >= 255) {
     const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
     next(err);
   }
@@ -32,7 +32,7 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   .format('YYYY年MM月DD日 HH時mm分ss秒');
 
   Quiz.create({
-    quizName: req.body.name,  
+    quizName: req.body.quizName,  
     question: req.body.question,
     answer: req.body.answer,
     tag: req.body.tagvalue,
@@ -107,7 +107,7 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
         .tz('Asia/Tokyo')
         .format('YYYY年MM月DD日 HH時mm分ss秒');
 
-        quiz.upsert({
+        quiz.update({
           quizName: req.body.name,
           question: req.body.question,
           answer: req.body.answer,
