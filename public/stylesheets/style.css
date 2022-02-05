@@ -161,6 +161,7 @@ h1,h2,h3 {
 }
 
 #loading-icon {
+  display: block;
   box-sizing: border-box;
   width: 15px;
   height: 15px;
