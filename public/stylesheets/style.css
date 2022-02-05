@@ -179,10 +179,18 @@ h1,h2,h3 {
   }
   
   .create-quiz-thumbnail,.star-report-thumbnail {
-    background-color: #bff5ff;
+    background-color: #8bb0b6;
   }
   
   .play-quiz-thumbnail {
-    background-color: #bff5ff;
+    background-color: #7b9fa5;
+  }
+
+  .copyright,.title,.footer-a {
+    color: #fff;
+  }
+
+  .card {
+    color: #999;
   }
 }
