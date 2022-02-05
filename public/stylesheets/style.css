@@ -156,6 +156,10 @@ h1,h2,h3 {
   filter: none;
 }
 
+#report,#star {
+  display: none;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
