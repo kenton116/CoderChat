@@ -151,5 +151,38 @@ h1,h2,h3 {
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000;
+    color: #fff;
+  }
+
+  nav {
+    background-color: #99b5ba;
+  }
+
+  footer,.quiz-div {
+    background-color: #999;
+  }
+
+  .jumbotron {
+    background-color: #82aab1;
+  }
+
+  #message {
+    background-color: #b3c6c9;
+  }
+  
+  .answer-message {
+    background-color: #fefeef;
+  }
+  
+  .promotion {
+    background-color: #eafcff;
+  }
+  
+  .create-quiz-thumbnail,.star-report-thumbnail {
+    background-color: #bff5ff;
+  }
+  
+  .play-quiz-thumbnail {
+    background-color: #bff5ff;
   }
 }
