@@ -15,7 +15,7 @@ const User = sequelize.define(
       allowNull: false
     },
     nickname: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false
     }
   },
