@@ -154,36 +154,20 @@ h1,h2,h3 {
     color: #fff;
   }
 
-  nav {
+  nav,.promotion,.jumbotron,#message {
     background-color: #99b5ba;
   }
 
   footer,.quiz-div {
     background-color: #999;
   }
-
-  .jumbotron {
-    background-color: #82aab1;
-  }
-
-  #message {
-    background-color: #b3c6c9;
-  }
   
   .answer-message {
     background-color: #fefeef;
   }
   
-  .promotion {
-    background-color: #597074;
-  }
-  
-  .create-quiz-thumbnail,.star-report-thumbnail {
+  .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
     background-color: #8bb0b6;
-  }
-  
-  .play-quiz-thumbnail {
-    background-color: #7b9fa5;
   }
 
   .copyright,.title,.footer-a {
