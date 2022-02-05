@@ -115,6 +115,7 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
 
         quiz.update({
           quizId: quiz.quizId,
+          quizName: req.body.quizName,
           question: req.body.question,
           answer: req.body.answer,
           tag: req.body.tagvalue,
