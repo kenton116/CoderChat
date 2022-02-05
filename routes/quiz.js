@@ -37,7 +37,7 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
     answer: req.body.answer,
     tag: req.body.tagvalue,
     createdBy: req.user.id,
-    createUser: req.user.username,
+    createUser: req.user.nickname,
     updatedAt: date,
     badReview: 0,
     star: 0
