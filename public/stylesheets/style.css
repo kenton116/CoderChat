@@ -167,19 +167,19 @@ h1,h2,h3 {
   }
 
   nav,.promotion,.jumbotron,#message {
-    background-color: #99b5ba;
+    background-color: #001360;
   }
 
   footer,.quiz-div {
-    background-color: #999;
+    background-color: #333;
   }
   
   .answer-message {
-    background-color: #fefeef;
+    background-color: #9cbb2c;
   }
   
   .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
-    background-color: #8bb0b6;
+    background-color: #001f87;
   }
 
   .copyright,.title,.footer-a {
@@ -187,6 +187,6 @@ h1,h2,h3 {
   }
 
   .card {
-    background-color: #999;
+    background-color: #333;
   }
 }
