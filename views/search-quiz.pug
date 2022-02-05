@@ -9,6 +9,7 @@ block content
       table.table
         tr
           th クイズ名
+          th 作成者
           th 更新日時
           th ⭐️
           th
@@ -16,6 +17,8 @@ block content
           tr
             td
               a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+            td 
+              a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
             td #{quiz.updatedAt}
             td #{quiz.star}
             td 
