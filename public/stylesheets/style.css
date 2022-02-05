@@ -177,7 +177,7 @@ h1,h2,h3 {
   z-index: 2;
 }
 
-.message:after,.answer-message;after {
+.message:after,.answer-message:after {
   content: "";
   position: absolute;
   bottom: -30px;
