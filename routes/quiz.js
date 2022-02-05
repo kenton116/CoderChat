@@ -24,11 +24,7 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 router.post('/search/', authenticationEnsurer, (req, res, next) => {
   Quiz.findAll({
     where: {
-      [Op.or]: {
-        tag: req.body.search,
-        createUser: req.body.search,
-        quizName: req.body.search
-      }
+      tag: req.body.search,
     },
     order: [['star', 'DESC']]
   }).then(quizzes => {
