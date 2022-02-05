@@ -10,6 +10,7 @@ const quizRouter = require('./routes/quiz');
 const dashboardRouter = require('./routes/dashboard');
 const roomRouter = require('./routes/room');
 const docsRouter = require('./routes/docs');
+const userRouter = require('./routes/user');
 // const config = require('./config-local');
 const app = express();
 
@@ -47,7 +48,8 @@ passport.use(new GoogleStrategy({
   process.nextTick(function () {
     User.upsert({
       userId: profile.id,
-      username: profile.displayName
+      username: profile.displayName,
+      nickname: profile.displayName
     }).then(() => {
       return done(null, { id: profile.id, username: profile.displayName });
     });
@@ -64,7 +66,8 @@ passport.use(new GitHubStrategy({
     process.nextTick(function () {
       User.upsert({
         userId: profile.id,
-        username: profile.username
+        username: profile.username,
+        nickname: profile.username
       }).then(() => {
         return done(null, profile);
       });
@@ -120,6 +123,7 @@ app.use('/quiz', quizRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/room', roomRouter);
 app.use('/docs', docsRouter);
+app.use('/user', userRouter);
 
 app.use(session({
   secret: process.env.SECRET /*|| config.session.secret*/,

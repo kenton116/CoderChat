@@ -3,6 +3,7 @@ extends layout
 block content
   h1 ダッシュボード
   p お帰りなさい！ #{user.username} さん
+  a(href="/user/mypage") マイページ
   
   div.quiz
     div.create-quiz
@@ -34,7 +35,6 @@ block content
             td #{quiz.star}
             td 
               a(href=`/quiz/${quiz.quizId}/edit`) 編集
-
     else 
       h4 作ったクイズがありません😢
       a(href="quiz/new").btn.btn-info 早速クイズを作りましょう！
@@ -55,7 +55,8 @@ block content
             tr 
               td 
                 a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-              td #{quiz.createUser}
+              td 
+                a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
               td #{quiz.updatedAt}
               td #{quiz.star}
 
