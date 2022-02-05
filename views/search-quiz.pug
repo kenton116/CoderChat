@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 検索結果: #{tag}
+     
+  div.quiz-list
+    - var hasQuizzes = quizzes.length > 0
+    if (hasQuizzes)
+      table.table
+        tr
+          th クイズ名
+          th 更新日時
+          th ⭐️
+          th
+        each quiz in quizzes
+          tr
+            td
+              a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+            td #{quiz.updatedAt}
+            td #{quiz.star}
+            td 
+              a(href=`/quiz/${quiz.quizId}/edit`) 編集
+    else 
+      h4 クイズが見つかりませんでした
