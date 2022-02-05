@@ -5,7 +5,9 @@ const authenticationEnsurer = require('./authentication-ensurer');
 
 router.get('/', authenticationEnsurer , (req, res, next) => {
   req.logout();
-  res.render('logout')
+  res.render('logout', {
+    user: req.user
+  })
 });
 
 module.exports = router;

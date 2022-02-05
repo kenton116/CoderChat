@@ -29,6 +29,7 @@ router.post('/search/', authenticationEnsurer, (req, res, next) => {
     order: [['star', 'DESC']]
   }).then(quizzes => {
       res.render('search-quiz', {
+        user: req.user,
         tag: req.body.search,
         quizzes: quizzes,
       });

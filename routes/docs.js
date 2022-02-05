@@ -3,19 +3,27 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.render('docs');
+  res.render('docs', {
+    user: req.user
+  });
 });
 
 router.get('/terms', (req, res, next) => {
-  res.render('terms');
+  res.render('terms', {
+    user: req.user
+  });
 });
 
 router.get('/policies', (req, res, next) => {
-  res.render('policies');
+  res.render('policies', {
+    user: req.user
+  });
 });
 
 router.get('/site', (req, res, next) => {
-  res.render('site');
+  res.render('site', {
+    user: req.user
+  });
 });
 
 module.exports = router;
