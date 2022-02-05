@@ -2,12 +2,13 @@ extends layout
 
 block content
   h1.my-3 クイズの編集
-  p 利用規約を守って編集してください。
+  h3 利用規約を守って編集してください。
   
   form(method="post", action=`/quiz/${quiz.quizId}?edit=1` id="form")
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
-      h3 #{quiz.quizName}
+      h3 クイズ名
+      input(type="text" name="quizname" placeHolder="クイズの名前を入力...（必須）" value=`${quiz.quizName}` size=30 required)
     div.form-group
       h3 問題
       input(type="text" name="question" placeHolder="問題を入力...（必須）" value=`${quiz.question}` size=30 required)
