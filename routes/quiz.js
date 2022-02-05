@@ -22,11 +22,6 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 });
 
 router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
-  if (req.body.quizName.length >= 255) {
-    const err = new Error('クイズを作成または編集できませんでした。もう一度やりなおしてください。');
-    next(err);
-  }
-
   const date = dayjs()
   .tz('Asia/Tokyo')
   .format('YYYY年MM月DD日 HH時mm分ss秒');
