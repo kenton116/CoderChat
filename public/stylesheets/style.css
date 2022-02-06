@@ -210,7 +210,7 @@ h1,h2,h3 {
   }
 
   nav,.promotion,.jumbotron,#message {
-    background-color: #001360;
+    background-color: #000722;
   }
 
   footer,.quiz-div {
@@ -222,7 +222,7 @@ h1,h2,h3 {
   }
   
   .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
-    background-color: #001f87;
+    background-color: #000;
   }
 
   .copyright,.title,.footer-a {
