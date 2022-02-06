@@ -53,9 +53,9 @@ block content
               th 作成者
               th 更新日時 
               th ⭐️
-              //- if isAdmin
-              th 報告件数 
-              th
+              if isAdmin
+                th 報告件数 
+                th
             each quiz in allQuiz
               tr 
                 td 
@@ -64,7 +64,7 @@ block content
                   a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
                 td #{quiz.updatedAt}
                 td #{quiz.star}
-                //- if isAdmin
-                td #{quiz.badReview}
-                td 
-                  a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
+                if isAdmin
+                  td #{quiz.badReview}
+                  td 
+                    a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
