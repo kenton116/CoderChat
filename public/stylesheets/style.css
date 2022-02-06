@@ -163,7 +163,6 @@ h1,h2,h3 {
   }
 
   .table {
-    width: 100%;
     overflow-x: scroll;
   }
 }
