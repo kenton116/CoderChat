@@ -149,7 +149,7 @@ h1,h2,h3 {
 }
 
 .answer {
-  filter: blur(6px);
+  filter: blur(10px);
 }
 
 #answer-button {
