@@ -58,7 +58,7 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   })
 });
 
-router.get('/:quizId',authenticationEnsurer,(req, res, next) => {
+router.get('/:quizId',authenticationEnsurer,csrfProtection,(req, res, next) => {
     Quiz.findOne({
       include: [{
         model: User,
