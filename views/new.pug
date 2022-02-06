@@ -1,20 +1,20 @@
 extends layout
 
 block content
-  h1 クイズを作る
+  h1 クイズを作る🗒
   h3 利用規約を守って作成してください。
   
   form(method="post", action="/quiz" id="form").my-3
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
       h3 クイズ名
-      input(type="text" name="quizname" placeHolder="クイズの名前を入力...（必須）" size=30 required)
+      input(type="text" name="quizname" placeHolder="クイズの名前を入力...（必須）" size=50 required)
     div.form-group
       h3 問題
-      input(type="text" name="question" placeHolder="問題を入力...（必須）" size=30 required)
+      input(type="text" name="question" placeHolder="問題を入力...（必須）" size=50 required)
     div.form-group 
       h3 答え
-      input(type="text", name="answer" placeHolder="答えを入力...（必須）" size=30 required)
+      input(type="text", name="answer" placeHolder="答えを入力...（必須）" size=50 required)
     div.form-group 
       h3 タグ
       input(type="radio" name="tag" value="HTML/CSS/Markdown" required)
