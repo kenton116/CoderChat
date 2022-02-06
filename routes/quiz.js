@@ -27,8 +27,8 @@ router.post('/search/', authenticationEnsurer, (req, res, next) => {
     where: {
       [Op.or] : [
         {
-          tag: `%req.body.search%`,
-          quizName: `%req.body.search%`,
+          tag: req.body.search,
+          quizName: req.body.search,
         }
       ]
     },
