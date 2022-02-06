@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Quiz = require('../models/quiz');
 const User = require('../models/user');
+const { Op } = require('sequelize');
 const authenticationEnsurer = require('./authentication-ensurer');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc')
@@ -24,7 +25,12 @@ router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
 router.post('/search/', authenticationEnsurer, (req, res, next) => {
   Quiz.findAll({
     where: {
-      tag: req.body.search,
+      [Op.or] : [
+        {
+          tag: `%req.body.search%`,
+          quizName: `%req.body.search%`,
+        }
+      ]
     },
     order: [['star', 'DESC']]
   }).then(quizzes => {
