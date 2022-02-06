@@ -36,9 +36,9 @@ let iCountUserQuiz = 0;
 io.on('connection', (socket) => {
   socket.join('api');
   iCountUserQuiz = iCountUserQuiz+1;
-  // if(iCountUserQuiz === 1) {
-  //   chooseQuiz();
-  // }
+  if(iCountUserQuiz === 1) {
+    chooseQuiz();
+  }
   io.emit('chat message', '入室しました' , 'info' , iCountUserQuiz);
 
   socket.on('disconnect', () => {
