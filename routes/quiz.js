@@ -151,6 +151,26 @@ function deleteQuizAggregate(quizId, done, err) {
   });
 }
 
+router.post('/:quizId/report', authenticationEnsurer, csrfProtection,(req, res, next) => {
+  Quiz.increment('badReview', {
+    where: {
+      quizId: req.params.quizId
+    }})
+    .then(() => {
+      res.redirect('/quiz/' + req.params.quizId);
+    });
+});
+
+router.post('/:quizId/star', authenticationEnsurer, csrfProtection,(req, res, next) => {
+  Quiz.increment('star', {
+    where: {
+      quizId: req.params.quizId
+    }})
+    .then(() => {
+      res.redirect('/quiz/' + req.params.quizId);
+    });
+});
+
 router.deleteQuizAggregate = deleteQuizAggregate;
 
 function isMine(req, quiz) {

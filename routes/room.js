@@ -19,24 +19,4 @@ router.get('/quiz', authenticationEnsurer, csrfProtection,(req, res, next) => {
    });
 });
 
-router.post('/quiz/report', authenticationEnsurer, csrfProtection,(req, res, next) => {
-  Quiz.increment('badReview', {
-    where: {
-      quizId: req.body.quizId
-    }})
-    .then(() => {
-      res.redirect('/room/quiz');
-    });
-});
-
-router.post('/quiz/star', authenticationEnsurer, csrfProtection,(req, res, next) => {
-  Quiz.increment('star', {
-    where: {
-      quizId: req.body.quizId
-    }})
-    .then(() => {
-      res.redirect('/room/quiz');
-    });
-});
-
 module.exports = router;

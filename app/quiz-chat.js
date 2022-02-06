@@ -12,13 +12,7 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const alertMessage = $('#alert-message').get(0);
-const reportQuizId = $('#report-quiz-id');
-const starQuizId = $('#star-quiz-id');
-const report = $('#report').get(0);
-const star = $('#star').get(0);
 let isAnswer = $('#is-answer');
-report.style.display = 'none';
-star.style.display = 'none';
 let isAnswerValue = isAnswer.checked;
 
 form.on('click', (e) => {
@@ -44,8 +38,6 @@ socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
 
 socket.on('api' , (api) => {
   const data = JSON.parse(api);
-  report.style.display = 'none';
-  star.style.display = 'none';
   alertMessage.innerText = '';
   quizName.innerText = data[1].quizName;
   quizByUsername.innerText = '👤 ' + data[4].createUser + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
@@ -58,8 +50,6 @@ socket.on('api' , (api) => {
     timer.innerText = '⏳ ' + t;
     if(1 > t) {
       question.innerText = '';
-      report.style.display = 'block';
-      star.style.display = 'block';
       answer.innerText = 'A.　' + data[3].answer;
     };
   });
