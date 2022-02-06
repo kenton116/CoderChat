@@ -113,7 +113,7 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
         .tz('Asia/Tokyo')
         .format('YYYY年MM月DD日 HH時mm分ss秒');
 
-        Quiz.upsert({
+        quiz.update({
           quizId: quiz.quizId,
           quizName: req.body.quizname,
           question: req.body.question,
