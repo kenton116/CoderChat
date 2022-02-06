@@ -21,17 +21,17 @@ html(lang='ja')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body 
     header 
-    nav
-      div.nav-header
-        img(src="https://coderchat-app.herokuapp.com/images/coderchat.png" alt="CoderChatのアイコン画像" width="50px").icon
-        a(href="/").title CoderChat
-        p 会話して学ぼう
-      div.nav-body
-        if (user)
-            a(href="/dashboard").btn.btn-outline-info.nav-body-a ダッシュボード
-            a(href="/logout").btn.btn-outline-info.nav-body-a #{user.username} をログアウト
-        else
-            a(href="/login").btn.btn-outline-info.nav-body-a ログイン
+      nav
+        div.nav-header
+          img(src="https://coderchat-app.herokuapp.com/images/coderchat.png" alt="CoderChatのアイコン画像" width="50px").icon
+          a(href="/").title CoderChat
+          p 会話して学ぼう
+        div.nav-body
+          if (user)
+              a(href="/dashboard").btn.btn-outline-info.nav-body-a ダッシュボード
+              a(href="/logout").btn.btn-outline-info.nav-body-a #{user.username} をログアウト
+          else
+              a(href="/login").btn.btn-outline-info.nav-body-a ログイン
     block content
     footer 
       a(href="/").title CoderChat
