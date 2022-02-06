@@ -43,7 +43,7 @@ block content
     div.all-quiz-list
       h2.my-3 みんなのクイズ👥
       form(method="post" action="/quiz/search").form#search
-        input(type="search" name="search" placeHolder="検索内容を入力").form-control
+        input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
         button(type="submit").btn.btn-info 検索
       table.table
           tr
