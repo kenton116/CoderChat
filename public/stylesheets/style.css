@@ -194,14 +194,4 @@ h1,h2,h3 {
   .card {
     background-color: #333;
   }
-
-  .btn-outline-info {
-    color: #00788a;
-    border-color: #00788a;
-  }
-
-  .btn-outline-danger {
-    color: #9a2631;
-    border-color: #9a2631;
-  }
 }
