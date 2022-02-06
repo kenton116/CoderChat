@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     socket.leave('api');
-    iCountUserQuiz = iCountUserQuiz - 3;
+    iCountUserQuiz = iCountUserQuiz - 1;
     io.emit('chat message', '退室しました' , 'info' , iCountUserQuiz);
     if(iCountUserQuiz === 0) {
       return i = 30;
