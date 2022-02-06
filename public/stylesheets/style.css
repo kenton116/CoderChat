@@ -172,6 +172,7 @@ h1,h2,h3 {
   .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
     width: 100%;
     margin: auto;
+    margin-top: 10px;
   }
 
   nav {
@@ -188,6 +189,7 @@ h1,h2,h3 {
   }
 
   .table {
+    white-space: nowrap;
     overflow-x: scroll;
   }
 
