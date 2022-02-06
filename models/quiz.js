@@ -11,7 +11,6 @@ const Quiz = sequelize.define(
     },
     quizName: {
       type: DataTypes.TEXT,
-      primaryKey: true,
       allowNull: false
     },
     question: {
