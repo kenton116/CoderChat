@@ -6,7 +6,7 @@ block content
   div.card.my-3 
     div.card-body
       h3 Q.  #{quiz.question}
-      label(for="answer-button").btn.btn-info 答えの表示/非表示切り替え
+      label(for="answer-button").btn.btn-outline-info 答えの表示/非表示切り替え
       input(type="checkbox")#answer-button
       div.answer
         h3 A.  #{quiz.answer}
@@ -18,8 +18,8 @@ block content
       - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle
       if isMineOrAdmin
         div
-          a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-info このクイズを編集する
+          a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info このクイズを編集する
           
   form(method="post" action="/quiz/search").form#search
     input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
-    button(type="submit").btn.btn-info 検索
+    button(type="submit").btn.btn-outline-info 検索

@@ -75,10 +75,10 @@ block content
       span 　その他 （これを選択する場合は、「クイズの名前」に、言語などのtagの代わりとなるものを入力してください。）
       input(type="hidden" name="tagvalue" id="tag-value")
 
-    button(type="submit").btn.btn-info 以上の内容でクイズを編集する
+    button(type="submit").btn.btn-outline-info 以上の内容でクイズを編集する
   h3 危険な変更
   form(method="post", action=`/quiz/${quiz.quizId}?delete=1`)
     input(type="hidden" name="_csrf" value!=csrfToken)
-    button(type="submit").btn.btn-danger このクイズを削除する
+    button(type="submit").btn.btn-outline-danger このクイズを削除する
   script(src="/javascripts/jquery-3.6.0.js") 
   script(defer, src="/javascripts/form.js")

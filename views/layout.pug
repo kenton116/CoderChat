@@ -26,8 +26,8 @@ html(lang='ja')
         p 会話して学ぼう
       div.nav-body
         if (user)
-            a(href="/dashboard").btn.btn-info.nav-body-a ダッシュボード
-            a(href="/logout").btn.btn-info.nav-body-a #{user.username} をログアウト
+            a(href="/dashboard").btn.btn-outline-info.nav-body-a ダッシュボード
+            a(href="/logout").btn.btn-outline-info.nav-body-a #{user.username} をログアウト
         else
             a(href="/login").btn.btn-info.nav-body-a ログイン
     block content

@@ -9,12 +9,12 @@ block content
     div.create-quiz
       h2.my-3 クイズを作る🗒
       p クイズを作ってみませんか？
-      a(href="/quiz/new").btn.btn-info 新規クイズを作成
+      a(href="/quiz/new").btn.btn-outline-info 新規クイズを作成
 
     div.join-room
       h2.my-3 ルームに参加🚪
       p オンラインで学習しませんか？
-      a(href="/room/quiz").btn.btn-info クイズルームに入室
+      a(href="/room/quiz").btn.btn-outline-info クイズルームに入室
       
   div.quiz-list
     h2.my-3 あなたのクイズ👤
@@ -34,7 +34,7 @@ block content
             td #{quiz.updatedAt}
             td #{quiz.star}
             td 
-              a(href=`/quiz/${quiz.quizId}/edit`) 編集
+              a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
     else 
       h4 作ったクイズがありません😢
       p 早速クイズを作りましょう！
@@ -44,7 +44,7 @@ block content
       h2.my-3 みんなのクイズ👥
       form(method="post" action="/quiz/search").form#search
         input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
-        button(type="submit").btn.btn-info 検索
+        button(type="submit").btn.btn-outline-info 検索
       table.table
           tr
             th クイズ名
@@ -66,4 +66,4 @@ block content
               if isAdmin
                 td #{quiz.badReview}
                 td 
-                  a(href=`/quiz/${quiz.quizId}/edit`) 編集
+                  a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集

@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 クイズルーム🚪
-  a(href="/dashboard").btn.btn-danger 退室
+  a(href="/dashboard").btn.btn-outline-danger 退室
   div.quiz-div
     h2#alert-message 接続中です。少しお待ちください。リロードは不要です。
     h3#timer
@@ -15,12 +15,12 @@ block content
       form(method="post" action="/room/quiz/report")#report-form
         input(type="hidden" name="_csrf" value!=csrfToken)
         input(type="hidden" name="quizId")#report-quiz-id
-        button(type="submit").btn.btn-danger このクイズを報告
+        button(type="submit").btn.btn-outline-danger このクイズを報告
     div#star
       form(method="post" action="/room/quiz/star")#star-form
         input(type="hidden" name="_csrf" value!=csrfToken)
         input(type="hidden" name="quizId")#star-quiz-id
-        button(type="submit").btn.btn-info ⭐️をつける
+        button(type="submit").btn.btn-outline-info ⭐️をつける
   h2 チャット
   hr
   div#message

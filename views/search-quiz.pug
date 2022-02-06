@@ -22,10 +22,10 @@ block content
             td #{quiz.updatedAt}
             td #{quiz.star}
             td 
-              a(href=`/quiz/${quiz.quizId}/edit`) 編集
+              a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
     else 
       h4 クイズが見つかりませんでした
 
   form(method="post" action="/quiz/search").form#search
     input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
-    button(type="submit").btn.btn-info 検索
+    button(type="submit").btn.btn-outline-info 検索
