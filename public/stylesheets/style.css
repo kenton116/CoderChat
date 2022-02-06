@@ -188,7 +188,6 @@ h1,h2,h3 {
   }
   
   .table {
-    width: 100%;
     white-space: nowrap;
   }
 
@@ -231,5 +230,9 @@ h1,h2,h3 {
 
   .card {
     background-color: #333;
+  }
+
+  a:hover {
+    color: #a7e6ff;
   }
 }
