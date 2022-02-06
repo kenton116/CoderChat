@@ -107,13 +107,7 @@ var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#question').get(0)
 var answer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer').get(0);
 var timer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#timer').get(0);
 var alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alert-message').get(0);
-var reportQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report-quiz-id');
-var starQuizId = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#star-quiz-id');
-var report = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#report').get(0);
-var star = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#star').get(0);
-var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer').get(0);
-report.style.display = 'none';
-star.style.display = 'none';
+var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer');
 var isAnswerValue = isAnswer.checked;
 form.on('click', function (e) {
   e.preventDefault();
@@ -124,36 +118,31 @@ form.on('click', function (e) {
     input.value = '';
   }
 });
-socket.on('chat message', function (msg, user, userCount, isAnswer) {
+socket.on('chat message', function (msg, user, userCount, isAnswerMessage) {
   var item = document.createElement('p');
-  item.className = 'message';
+  item.classList.add = 'message';
 
-  if (isAnswer === true) {
-    item.className = 'answer-message';
+  if (isAnswerMessage === true) {
+    item.classList.add = 'answer-message';
   }
 
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
-  userCountValue.innerText = '👤' + userCount + '人';
+  var Count = userCount - 1;
+  userCountValue.innerText = '👤' + Count + '人';
 });
 socket.on('api', function (api) {
   var data = JSON.parse(api);
-  report.style.display = 'none';
-  star.style.display = 'none';
   alertMessage.innerText = '';
   quizName.innerText = data[1].quizName;
   quizByUsername.innerText = '👤 ' + data[4].createUser + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
   question.innerText = 'Q. ' + data[2].question;
-  reportQuizId.val(data[0].quizId);
-  starQuizId.val(data[0].quizId);
   answer.innerText = "";
   socket.on('timer', function (t) {
     timer.innerText = '⏳ ' + t;
 
     if (1 > t) {
       question.innerText = '';
-      report.style.display = 'block';
-      star.style.display = 'block';
       answer.innerText = 'A.　' + data[3].answer;
     }
 
