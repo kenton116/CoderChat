@@ -128,8 +128,7 @@ socket.on('chat message', function (msg, user, userCount, isAnswerMessage) {
 
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
-  var Count = userCount - 1;
-  userCountValue.innerText = '👤' + Count + '人';
+  userCountValue.innerText = '👤' + userCount + '人';
 });
 socket.on('api', function (api) {
   var data = JSON.parse(api);

@@ -32,8 +32,7 @@ socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   }
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
-  const Count = userCount - 1;
-  userCountValue.innerText = '👤' + Count + '人';
+  userCountValue.innerText = '👤' + userCount + '人';
 });
 
 socket.on('api' , (api) => {
