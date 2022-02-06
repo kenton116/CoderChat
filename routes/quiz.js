@@ -16,6 +16,7 @@ const csrfProtection = csrf({ cookie: true });
 
 router.get('/new', authenticationEnsurer, csrfProtection, (req, res, next) => {
   res.render('new', {
+    title: "クイズを新規作成 - CoderChat",
     user: req.user,
     csrfToken: req.csrfToken()
   });
@@ -29,6 +30,7 @@ router.post('/search/', authenticationEnsurer, (req, res, next) => {
     order: [['star', 'DESC']]
   }).then(quizzes => {
       res.render('search-quiz', {
+        title: "検索結果 - CoderChat",
         user: req.user,
         tag: req.body.search,
         quizzes: quizzes,
@@ -68,6 +70,7 @@ router.get('/:quizId',authenticationEnsurer,(req, res, next) => {
     }).then((quiz) => {
       if(quiz) {
         res.render('quiz', {
+          title: "クイズページ - CoderChat",
           user: req.user,
           quiz: quiz,
           adminGithub: process.env.ADMIN_GITHUB /*|| config.admin.github*/,
@@ -89,6 +92,7 @@ router.get('/:quizId/edit', authenticationEnsurer, csrfProtection, (req, res, ne
   }).then((quiz) => {
     if (isMine(req, quiz) || isAdmin(req)) {
       res.render('edit', {
+        title: "クイズを編集 - CoderChat",
         user: req.user,
         quiz: quiz,
         csrfToken: req.csrfToken()

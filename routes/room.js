@@ -13,6 +13,7 @@ const csrfProtection = csrf({ cookie: true });
 
 router.get('/quiz', authenticationEnsurer, csrfProtection,(req, res, next) => {
   res.render('quizroom', { 
+    title: "クイズルーム - CoderChat",
     user: req.user,
     csrfToken: req.csrfToken()
    });

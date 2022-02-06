@@ -19,6 +19,7 @@ router.get('/:userId', authenticationEnsurer,(req, res, next) => {
     }).then((quizzes) => {
       if(user) {
         res.render('user', {
+          title: "ユーザーページ - CoderChat",
           user: user,
           quizzes: quizzes,
         });

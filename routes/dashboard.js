@@ -16,6 +16,7 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
         order: [['star', 'DESC']]
       }).then((allQuiz) => {
         res.render('dashboard', {
+          title: "ダッシュボード - CoderChat",
           user: req.user,
           quizzes: quizzes,
           allQuiz: allQuiz,
@@ -26,6 +27,7 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
     });
   } else {
     res.render('quiz', { 
+      title: "クイズページ - CoderChat",
       user: req.user,
      });
   }
