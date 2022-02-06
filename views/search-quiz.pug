@@ -6,23 +6,18 @@ block content
   div.quiz-list
     - var hasQuizzes = quizzes.length > 0
     if (hasQuizzes)
-      table.table
-        tr
-          th クイズ名
-          th 作成者
-          th 更新日時
-          th ⭐️
-          th
-        each quiz in quizzes
+      div.table-warp
+        table.table
           tr
-            td
-              a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-            td 
-              a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
-            td #{quiz.updatedAt}
-            td #{quiz.star}
-            td 
-              a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
+            th クイズ名
+            th 更新日時
+            th ⭐️
+          each quiz in quizzes
+            tr
+              td
+                a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+              td #{quiz.updatedAt}
+              td #{quiz.star}
     else 
       h4 クイズが見つかりませんでした
 
