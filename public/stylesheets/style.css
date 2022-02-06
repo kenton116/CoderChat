@@ -208,8 +208,8 @@ h1,h2,h3 {
     color: #fff;
   }
 
-  nav,.promotion,.jumbotron,#message {
-    background-color: #000722;
+  nav,.promotion,.jumbotron,#message,input {
+    background-color: #000935;
   }
 
   footer,.quiz-div {
