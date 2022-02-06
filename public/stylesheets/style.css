@@ -157,6 +157,10 @@ h1,h2,h3 {
   footer {
     display: block;
   }
+
+  table {
+    overflow-x: scroll;
+  }
 }
 
 .promotion img {
