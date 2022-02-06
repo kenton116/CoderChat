@@ -42,8 +42,6 @@ socket.on('api' , (api) => {
   quizName.innerText = data[1].quizName;
   quizByUsername.innerText = '👤 ' + data[4].createUser + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
   question.innerText = 'Q. ' + data[2].question;
-  reportQuizId.val(data[0].quizId);
-  starQuizId.val(data[0].quizId);
   answer.innerText = "";
 
   socket.on('timer' , (t) => {
