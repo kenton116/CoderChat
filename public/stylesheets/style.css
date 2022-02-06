@@ -196,6 +196,10 @@ h1,h2,h3 {
   .quiz {
     display: block;
   }
+
+  .create-quiz,.join-room {
+    width: 100%;
+  }
 }
 
 
