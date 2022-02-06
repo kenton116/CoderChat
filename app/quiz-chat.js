@@ -40,7 +40,7 @@ socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   messages.prepend(item);
   userCountValue.innerText = '👤' + (userCount - 1) + '人';
 });
-z
+
 socket.on('api' , (api) => {
   const data = JSON.parse(api);
   report.style.display = 'none';
