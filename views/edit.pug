@@ -8,13 +8,13 @@ block content
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
       h3 クイズ名
-      input(type="text" name="quizname" placeHolder="クイズの名前を入力...（必須）" value=`${quiz.quizName}` size=50 required)
+      input(type="text" name="quizname" placeHolder="クイズの名前を入力...（必須）" value=`${quiz.quizName}` required)
     div.form-group
       h3 問題
-      input(type="text" name="question" placeHolder="問題を入力...（必須）" value=`${quiz.question}` size=50 required)
+      input(type="text" name="question" placeHolder="問題を入力...（必須）" value=`${quiz.question}` required)
     div.form-group
       h3 答え
-      input(type="text", name="answer" placeHolder="答えを入力...（必須）" value=`${quiz.answer}` size=50 required)
+      input(type="text", name="answer" placeHolder="答えを入力...（必須）" value=`${quiz.answer}` required)
     div.form-group
       h3 タグ
       input(type="radio" name="tag" value="HTML/CSS/Markdown" required)#tag1

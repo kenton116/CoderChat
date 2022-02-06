@@ -173,7 +173,7 @@ th,td {
 }
 
 .form-control {
-  width: 80%;
+  width: 50%;
 }
 
 @media screen and (max-width: 750px) {
