@@ -172,7 +172,7 @@ th,td {
   white-space: nowrap;
 }
 
-input {
+input[type="text"] {
   width: 100%;
 }
 

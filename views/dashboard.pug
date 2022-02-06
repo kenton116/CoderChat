@@ -52,9 +52,9 @@ block content
               th クイズ名
               th 作成者
               th ⭐️
-              if isAdmin
-                th 報告件数 
-                th
+              //- if isAdmin
+              //-   th 報告件数 
+              //-   th
             each quiz in allQuiz
               tr 
                 td 
@@ -62,8 +62,7 @@ block content
                 td 
                   a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
                 td #{quiz.star}
-
-              if isAdmin
-                td #{quiz.badReview}
-                td 
-                  a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
+              //- if isAdmin
+              //-   td #{quiz.badReview}
+              //-   td 
+              //-     a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
