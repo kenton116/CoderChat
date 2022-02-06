@@ -120,7 +120,7 @@ h1,h2,h3 {
   font-weight: bold;
 }
 
-.create-quiz-thumbnail,.star-report-thumbnail {
+.create-quiz-thumbnail {
   width: 50%;
   margin-top: 10px;
   margin-left: 0;
@@ -181,7 +181,7 @@ input[type="text"] {
     width: 100%;
   }
 
-  .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
+  .create-quiz-thumbnail,.play-quiz-thumbnail {
     width: 100%;
     margin: auto;
     margin-top: 10px;
@@ -224,7 +224,7 @@ input[type="text"] {
     background-color: #a8bf55;
   }
   
-  .create-quiz-thumbnail,.star-report-thumbnail,.play-quiz-thumbnail {
+  .create-quiz-thumbnail,.play-quiz-thumbnail {
     background-color: #000;
   }
 
