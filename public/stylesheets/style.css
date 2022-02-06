@@ -176,6 +176,10 @@ th,td {
   width: 100%;
 }
 
+.form-group {
+  width: 100%;
+}
+
 @media screen and (max-width: 750px) {
   .promotion {
     width: 100%;

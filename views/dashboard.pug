@@ -51,7 +51,6 @@ block content
             tr
               th クイズ名
               th 作成者
-              th 更新日時 
               th ⭐️
               if isAdmin
                 th 報告件数 
@@ -62,7 +61,6 @@ block content
                   a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
                 td 
                   a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
-                td #{quiz.updatedAt}
                 td #{quiz.star}
 
               if isAdmin
