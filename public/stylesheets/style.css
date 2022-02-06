@@ -152,7 +152,11 @@ h1,h2,h3 {
   filter: blur(6px);
 }
 
-#answer-button:active + .answer{
+#answer-button {
+  display: none;
+}
+
+#answer-button:checked + .answer{
   filter: none;
 }
 
