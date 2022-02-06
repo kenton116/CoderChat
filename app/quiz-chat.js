@@ -26,7 +26,6 @@ form.on('click', (e) => {
   if (input.value) {
     isAnswerValue = isAnswer.checked;
     socket.emit('chat message', input.value, username, isAnswerValue);
-    isAnswer.checked = false;
     input.value = '';
   }
 });
@@ -48,7 +47,7 @@ socket.on('api' , (api) => {
   star.style.display = 'none';
   alertMessage.innerText = '';
   quizName.innerText = data[1].quizName;
-  quizByUsername.innerText = '👤 ' + data[4].createUser + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
+  quizByUsername.innerText = '👤 ' + (data[4].createUser - 1) + '　🏷 ' + data[6].tag + '　⭐️ ' + data[5].star;
   question.innerText = 'Q. ' + data[2].question;
   reportQuizId.val(data[0].quizId);
   starQuizId.val(data[0].quizId);
