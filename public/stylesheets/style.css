@@ -184,12 +184,12 @@ h1,h2,h3 {
   }
 
   .table-warp {
-    width: 100%;
-  }
-
-  .table {
-    white-space: nowrap;
     overflow-x: scroll;
+  }
+  
+  .table {
+    width: 100%;
+    white-space: nowrap;
   }
 
   .quiz {
@@ -199,8 +199,6 @@ h1,h2,h3 {
   .create-quiz,.join-room {
     width: 100%;
   }
-
-  
 }
 
 
