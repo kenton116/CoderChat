@@ -168,7 +168,7 @@ h1,h2,h3 {
   overflow-x: scroll;
 }
 
-.table {
+th,td {
   white-space: nowrap;
 }
 
