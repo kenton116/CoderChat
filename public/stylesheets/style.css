@@ -140,6 +140,30 @@ h1,h2,h3 {
   border-radius: 25px;
 }
 
+.promotion img {
+  border-radius: 10px;
+}
+
+.chat-btn {
+  margin-left: 1%;
+}
+
+.answer {
+  filter: blur(8px);
+}
+
+#answer-button {
+  display: none;
+}
+
+#answer-button:checked ~ .answer{
+  filter: none;
+}
+
+#report,#star {
+  display: none;
+}
+
 @media screen and (max-width: 750px) {
   .promotion {
     width: 100%;
@@ -166,31 +190,12 @@ h1,h2,h3 {
   .table {
     overflow-x: scroll;
   }
+
+  .quiz {
+    display: block;
+  }
 }
 
-.promotion img {
-  border-radius: 10px;
-}
-
-.chat-btn {
-  margin-left: 1%;
-}
-
-.answer {
-  filter: blur(8px);
-}
-
-#answer-button {
-  display: none;
-}
-
-#answer-button:checked ~ .answer{
-  filter: none;
-}
-
-#report,#star {
-  display: none;
-}
 
 
 @media (prefers-color-scheme: dark) {
