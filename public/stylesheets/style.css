@@ -172,6 +172,10 @@ h1,h2,h3 {
   white-space: nowrap;
 }
 
+.form-control {
+  width: 80%;
+}
+
 @media screen and (max-width: 750px) {
   .promotion {
     width: 100%;
@@ -224,7 +228,7 @@ h1,h2,h3 {
     background-color: #000;
   }
 
-  .copyright,.title,.footer-a {
+  .copyright,.title,.footer-a,.form-control {
     color: #fff;
   }
 
