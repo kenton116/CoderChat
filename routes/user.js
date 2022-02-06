@@ -11,11 +11,6 @@ router.get('/:userId', authenticationEnsurer,(req, res, next) => {
       userId: req.params.userId
     }
   }).then((user) => {
-    if(!user) {
-      const err = new Error('指定されたユーザーは見つかりません');
-      err.status = 404;
-      next(err);
-    }
     Quiz.findAll({
       where: {
         createdBy: user.userId
