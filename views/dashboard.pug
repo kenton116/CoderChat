@@ -46,23 +46,24 @@ block content
       form(method="post" action="/quiz/search").form#search
         input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
         button(type="submit").btn.btn-outline-primary 検索
-      table.table
-          tr
-            th クイズ名
-            th 作成者
-            th 更新日時 
-            th ⭐️
-            if isAdmin
-              th 報告件数 
-              th
-          each quiz in allQuiz
-            tr 
-              td 
-                a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-              td 
-                a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
-              td #{quiz.updatedAt}
-              td #{quiz.star}
+      div.table-warp
+        table.table
+            tr
+              th クイズ名
+              th 作成者
+              th 更新日時 
+              th ⭐️
+              if isAdmin
+                th 報告件数 
+                th
+            each quiz in allQuiz
+              tr 
+                td 
+                  a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+                td 
+                  a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
+                td #{quiz.updatedAt}
+                td #{quiz.star}
 
               if isAdmin
                 td #{quiz.badReview}
