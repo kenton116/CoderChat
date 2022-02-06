@@ -16,14 +16,12 @@ block content
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
       div#report
-        form(method="post" action="/room/quiz/report")#report-form
+        form(method="post" action=`/${quiz.quiId}/report`)#report-form
           input(type="hidden" name="_csrf" value!=csrfToken)
-          input(type="hidden" name="quizId")#report-quiz-id
           button(type="submit").btn.btn-outline-danger このクイズを報告
       div#star
-        form(method="post" action="/room/quiz/star")#star-form
+        form(method="post" action=`/${quiz.quizId}/star`)#star-form
           input(type="hidden" name="_csrf" value!=csrfToken)
-          input(type="hidden" name="quizId")#star-quiz-id
           button(type="submit").btn.btn-outline-info ⭐️をつける
       - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle
       if isMineOrAdmin

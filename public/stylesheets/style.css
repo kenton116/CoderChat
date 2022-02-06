@@ -160,10 +160,6 @@ h1,h2,h3 {
   filter: none;
 }
 
-#report,#star {
-  display: none;
-}
-
 .table-warp {
   overflow-x: scroll;
 }
