@@ -21,20 +21,21 @@ block content
     - var hasQuizzes = quizzes.length > 0
     if(hasQuizzes)
       p あなたが作ったクイズです！
-      table.table
-        tr
-          th クイズ名
-          th 更新日時  
-          th ⭐️
-          th
-        each quiz in quizzes
+      div.table-warp
+        table.table
           tr
-            td
-              a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
-            td #{quiz.updatedAt}
-            td #{quiz.star}
-            td 
-              a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
+            th クイズ名
+            th 更新日時  
+            th ⭐️
+            th
+          each quiz in quizzes
+            tr
+              td
+                a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
+              td #{quiz.updatedAt}
+              td #{quiz.star}
+              td 
+                a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
     else 
       h4 作ったクイズがありません😢
       p 早速クイズを作りましょう！

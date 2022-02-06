@@ -158,6 +158,10 @@ h1,h2,h3 {
     display: block;
   }
 
+  .table-warp {
+    overflow-x: hidden;
+  }
+
   .table {
     width: 100%;
     overflow-x: scroll;
