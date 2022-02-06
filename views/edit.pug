@@ -4,7 +4,7 @@ block content
   h1.my-3 クイズの編集
   h3 利用規約を守って編集してください。
   
-  form(method="post", action=`/quiz/${quiz.quizId}?edit=1` id="form")
+  form(method="post" action=`/quiz/${quiz.quizId}?edit=1` id="form")
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
       h3 クイズ名
@@ -12,10 +12,10 @@ block content
     div.form-group
       h3 問題
       input(type="text" name="question" placeHolder="問題を入力...（必須）" value=`${quiz.question}` size=30 required)
-    div 
+    div.form-group
       h3 答え
       input(type="text", name="answer" placeHolder="答えを入力...（必須）" value=`${quiz.answer}` size=30 required)
-    div 
+    div.form-group
       h3 タグ
       input(type="radio" name="tag" value="html-css-markdown" required)
       span 　HTML/CSS/Markdown
