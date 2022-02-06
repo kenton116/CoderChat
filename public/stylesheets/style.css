@@ -194,4 +194,13 @@ h1,h2,h3 {
   .card {
     background-color: #333;
   }
+
+  .btn-info {
+    background-color: #00788a;
+  }
+
+  .btn-danger {
+    background-color: #9a2631 
+
+  }
 }
