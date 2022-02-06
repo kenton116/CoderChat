@@ -164,6 +164,14 @@ h1,h2,h3 {
   display: none;
 }
 
+.table-warp {
+  overflow-x: scroll;
+}
+
+.table {
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 750px) {
   .promotion {
     width: 100%;
@@ -183,14 +191,6 @@ h1,h2,h3 {
     display: block;
   }
 
-  .table-warp {
-    overflow-x: scroll;
-  }
-  
-  .table {
-    white-space: nowrap;
-  }
-
   .quiz {
     display: block;
   }
@@ -208,7 +208,7 @@ h1,h2,h3 {
     color: #fff;
   }
 
-  nav,.promotion,.jumbotron,#message,input {
+  nav,.promotion,.jumbotron,#message,.form-control {
     background-color: #000935;
   }
 
