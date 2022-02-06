@@ -16,7 +16,7 @@ const reportQuizId = $('#report-quiz-id');
 const starQuizId = $('#star-quiz-id');
 const report = $('#report').get(0);
 const star = $('#star').get(0);
-const isAnswer = $('#is-answer').get(0);
+let isAnswer = $('#is-answer').get(0);
 report.style.display = 'none';
 star.style.display = 'none';
 let isAnswerValue = isAnswer.checked;
@@ -26,6 +26,7 @@ form.on('click', (e) => {
   if (input.value) {
     isAnswerValue = isAnswer.checked;
     socket.emit('chat message', input.value, username, isAnswerValue);
+    isAnswer.checked = false;
     input.value = '';
   }
 });
