@@ -26,9 +26,9 @@ form.on('click', (e) => {
 
 socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   const item = document.createElement('p');
-  item.classList.add = 'message';
+  item.className = 'message';
   if(isAnswerMessage === true) {
-    item.classList.add = 'answer-message';
+    item.className = 'answer-message';
   }
   item.innerText = user + ' : ' + msg;
   messages.prepend(item);
