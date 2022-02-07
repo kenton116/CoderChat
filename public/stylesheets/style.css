@@ -236,4 +236,8 @@ input[type="text"] {
   a:hover {
     color: #a7e6ff;
   }
+
+  .answer-message {
+    color: #000;
+  }
 }
