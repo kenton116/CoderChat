@@ -107,7 +107,7 @@ var question = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#question').get(0)
 var answer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer').get(0);
 var timer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#timer').get(0);
 var alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#alert-message').get(0);
-var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer');
+var isAnswer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#is-answer').get(0);
 var isAnswerValue = isAnswer.checked;
 form.on('click', function (e) {
   e.preventDefault();
@@ -120,7 +120,6 @@ form.on('click', function (e) {
 });
 socket.on('chat message', function (msg, user, userCount, isAnswer) {
   var item = document.createElement('p');
-  item.className = 'message';
 
   if (isAnswer === true) {
     item.className = 'answer-message';
