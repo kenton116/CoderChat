@@ -26,7 +26,6 @@ form.on('click', (e) => {
 
 socket.on('chat message', (msg , user , userCount , isAnswerMessage) => {
   const item = document.createElement('p');
-  item.className = 'message';
   if(isAnswerMessage === true) {
     item.className = 'answer-message';
   }
