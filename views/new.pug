@@ -4,7 +4,7 @@ block content
   h1 クイズを作る🗒
   h3 利用規約を守って作成してください。
   
-  form(method="post", action=`/quiz/${quiz.quizId}?edit=1` id="form").my-3
+  form(method="post", action=`/quiz/${quiz.quizId}` id="form").my-3
     input(type="hidden" name="_csrf" value!=csrfToken)
     div.form-group
       h3 クイズ名
