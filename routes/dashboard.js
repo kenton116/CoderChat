@@ -10,7 +10,7 @@ router.get('/', authenticationEnsurer,(req, res, next) => {
       where: {
         createdBy: req.user.id
       },
-      order: [['updatedAt', 'DESC']]
+      order: [['star', 'DESC']]
     }).then(quizzes => {
       Quiz.findAll({
         order: [['star', 'DESC']]
