@@ -12,7 +12,7 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const alertMessage = $('#alert-message').get(0);
-let isAnswer = $('#is-answer');
+let isAnswer = $('#is-answer').get(0);
 let isAnswerValue = isAnswer.checked;
 
 form.on('click', (e) => {
