@@ -94,7 +94,7 @@ h1,h2,h3 {
 }
 
 .answer-message {
-  background-color: #fefeef;
+  background-color: #ffff00;
 }
 
 .icon {
@@ -219,10 +219,6 @@ input[type="text"] {
 
   footer,.quiz-div {
     background-color: #333;
-  }
-  
-  .answer-message {
-    background-color: #a8bf55;
   }
   
   .create-quiz-thumbnail,.play-quiz-thumbnail {
