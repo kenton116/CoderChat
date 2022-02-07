@@ -118,11 +118,11 @@ form.on('click', function (e) {
     input.value = '';
   }
 });
-socket.on('chat message', function (msg, user, userCount, isAnswerMessage) {
+socket.on('chat message', function (msg, user, userCount, isAnswer) {
   var item = document.createElement('p');
   item.className = 'message';
 
-  if (isAnswerMessage === true) {
+  if (isAnswer === true) {
     item.className = 'answer-message';
   }
 

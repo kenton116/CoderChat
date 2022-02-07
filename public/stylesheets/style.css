@@ -89,6 +89,7 @@ h1,h2,h3 {
 #message {
   height: 200px;
   overflow-y:scroll;
+  overflow-wrap: break-word;
   background-color: #eafcff;
 }
 
