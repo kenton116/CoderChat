@@ -94,7 +94,6 @@ h1,h2,h3 {
 }
 
 .answer-message {
-  display: block;
   background-color: #ffff00;
 }
 
@@ -184,10 +183,6 @@ input[type="text"] {
 
 #star {
   margin-left: 10px;
-}
-
-#answer-hidden:checked ~ .answer-message {
-  display: hidden;
 }
 
 @media screen and (max-width: 750px) {
