@@ -44,7 +44,7 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
   .format('YYYY年MM月DD日 HH時mm分ss秒');
 
   Quiz.create({
-    quizName: req.bozdy.quizname,
+    quizName: req.body.quizname,
     question: req.body.question,
     answer: req.body.answer,
     tag: req.body.tagvalue,
