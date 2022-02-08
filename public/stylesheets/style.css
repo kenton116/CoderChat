@@ -186,7 +186,7 @@ input[type="text"] {
   margin-left: 10px;
 }
 
-.answer-hidden:checked ~ .answer-message {
+#answer-hidden:checked ~ .answer-message {
   display: block;
 }
 
