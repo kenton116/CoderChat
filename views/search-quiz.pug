@@ -20,6 +20,27 @@ block content
               td #{quiz.star}
     else 
       h4 クイズが見つかりませんでした
+      h3 次の中から検索してください
+      ul 
+        li HTML/CSS/Markdown 
+        li Javascript
+        li Node.js
+        li Python 
+        li Java
+        li C 
+        li C++
+        li C#
+        li Ruby 
+        li Ruby on Rails 
+        li Go 
+        li PHP 
+        li Larabel 
+        li Git/Github
+        li Linux 
+        li Network 
+        li Database 
+        li Security 
+        li Other
 
   form(method="post" action="/quiz/search").form#search
     input(type="search" name="search" placeHolder="検索したいタグを入力" required).form-control
