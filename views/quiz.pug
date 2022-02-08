@@ -15,14 +15,15 @@ block content
       p ⭐️お気に入り #{quiz.star} 個獲得！
       p 作成者: #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
-      div#report
-        form(method="post" action=`/quiz/${quiz.quizId}/report`)#report-form
-          input(type="hidden" name="_csrf" value!=csrfToken)
-          button(type="submit").btn.btn-outline-danger このクイズを報告
-      div#star
-        form(method="post" action=`/quiz/${quiz.quizId}/star`)#star-form
-          input(type="hidden" name="_csrf" value!=csrfToken)
-          button(type="submit").btn.btn-outline-info ⭐️をつける
+      div.star-report
+        div#report
+          form(method="post" action=`/quiz/${quiz.quizId}/report`)#report-form
+            input(type="hidden" name="_csrf" value!=csrfToken)
+            button(type="submit").btn.btn-outline-danger このクイズを報告
+        div#star
+          form(method="post" action=`/quiz/${quiz.quizId}/star`)#star-form
+            input(type="hidden" name="_csrf" value!=csrfToken)
+            button(type="submit").btn.btn-outline-info ⭐️をつける
       - var isMineOrAdmin = user.id === quiz.createdBy || user.id === adminGithub || user.id === adminGoogle
       if isMineOrAdmin
         div

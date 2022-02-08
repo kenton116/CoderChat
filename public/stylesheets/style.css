@@ -177,6 +177,14 @@ input[type="text"] {
   width: 100%;
 }
 
+.star-report {
+  display: flex;
+}
+
+#star {
+  margin-left: 10px;
+}
+
 @media screen and (max-width: 750px) {
   .promotion {
     width: 100%;
