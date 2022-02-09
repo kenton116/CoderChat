@@ -54,7 +54,9 @@ router.post('/', authenticationEnsurer, csrfProtection, (req, res, next) => {
     badReview: 0,
     star: 0
   }).then((quiz) => {
-    return res.redirect('/quiz/' + quiz.quizId);
+    return res.redirect('/quiz/' + quiz.quizId , {
+      alert: 'クイズを作成しました。'
+    });
   })
 });
 
@@ -126,7 +128,9 @@ router.post('/:quizId', authenticationEnsurer, csrfProtection, (req, res, next) 
           tag: req.body.tagvalue,
           updatedAt: date
         }).then(() => {
-          res.redirect('/quiz/' + quiz.quizId)
+          res.redirect('/quiz/' + quiz.quizId , {
+            alert: 'クイズを編集しました。'
+          })
         })
       } else if (parseInt(req.query.delete) === 1) {
           deleteQuizAggregate(req.params.quizId)
