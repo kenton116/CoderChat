@@ -12,6 +12,7 @@ const question = $('#question').get(0);
 const answer = $('#answer').get(0);
 const timer = $('#timer').get(0);
 const alertMessage = $('#alert-message').get(0);
+const quizPage = $('#quiz-page').get(0);
 let isAnswer = $('#is-answer').get(0);
 let isAnswerValue = isAnswer.checked;
 
@@ -47,6 +48,7 @@ socket.on('api' , (api) => {
     if(1 > t) {
       question.innerText = '';
       answer.innerText = 'A.　' + data[3].answer;
+      quizPage.innerHTML = '<a href="/quiz/' + data[0].quizId + '">'+ data[1].quizName +'</a>';
     };
   });
 });
