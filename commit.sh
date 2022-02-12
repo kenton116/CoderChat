@@ -1,4 +1,3 @@
-message=$m
 git add .
-git commit -am "$message"
+git commit -am "コミット"
 git push origin main
