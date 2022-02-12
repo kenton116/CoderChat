@@ -3,3 +3,4 @@ node_modules/
 public/javascripts/quiz-chat.js
 config-local.js
 config.js
+commit.sh

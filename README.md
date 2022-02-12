@@ -3,6 +3,7 @@
 「会話して学ぼう」をモットーにしたプログラミング学習のソーシャルサービスです。
 
 このアプリは、N予備校Webアプリケーションコンテスト2021冬の応募作品です。
+[こちら](https://coderchat-app.herokuapp.com)からアプリにアクセスできます。
 
 # ライセンス
 本アプリは、[MITライセンス](https://github.com/tokyo-metropolitan-gov/covid19/blob/development/LICENSE.txt)の元提供されています。
