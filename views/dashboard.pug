@@ -27,6 +27,7 @@ block content
             th クイズ名
             th 更新日時  
             th ⭐️
+            th 🏷
             th
           each quiz in quizzes
             tr
@@ -34,6 +35,7 @@ block content
                 a(href=`/quiz/${quiz.quizId}`) #{quiz.quizName}
               td #{quiz.updatedAt}
               td #{quiz.star}
+              td #{quiz.tag}
               td 
                 a(href=`/quiz/${quiz.quizId}/edit`).btn.btn-outline-info 編集
     else 
@@ -53,6 +55,7 @@ block content
               th 作成者
               th 更新日時 
               th ⭐️
+              th 🏷
               if isAdmin
                 th 報告件数 
                 th
@@ -64,6 +67,7 @@ block content
                   a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
                 td #{quiz.updatedAt}
                 td #{quiz.star}
+                td #{quiz.tag}
                 if isAdmin
                   td #{quiz.badReview}
                   td 
