@@ -6,7 +6,7 @@
 [こちら](https://coderchat-app.herokuapp.com)からアプリにアクセスできます。
 
 # ライセンス
-本アプリは、[MITライセンス](https://github.com/tokyo-metropolitan-gov/covid19/blob/development/LICENSE.txt)の元提供されています。
+本アプリは、[MITライセンス](https://github.com/kenton116/CoderChat/blob/main/LICENSE)の元提供されています。
 
 # 利用規約およびプライバシーポリシー
 以下をご覧ください。
