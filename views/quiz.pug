@@ -14,7 +14,7 @@ block content
     div.card-footer
       p ⭐️お気に入り #{quiz.star} 個獲得！
       p 作成者: 
-        a(href=`/user/${quiz.createUser}`) #{quiz.createUser}
+        a(href=`/user/${quiz.createdBy}`) #{quiz.createUser}
       p 更新日時 #{quiz.updatedAt}
       div.star-report
         div#report
