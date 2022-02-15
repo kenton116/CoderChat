@@ -5,13 +5,13 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const User = require('../models/user');
 const Quiz = require('../models/quiz')
 
-router.get('/:userId', authenticationEnsurer,(req, res, next) => {
+router.get('/:userId', authenticationEnsurer, (req, res, next) => {
   User.findOne({
     where: {
       userId: req.params.userId
     }
   }).then((user) => {
-    if(!user) {
+    if (!user) {
       const err = new Error('指定されたユーザーは見つかりません');
       err.status = 404;
       next(err);
@@ -20,12 +20,13 @@ router.get('/:userId', authenticationEnsurer,(req, res, next) => {
       where: {
         createdBy: user.userId
       },
-      order: [['star','DESC']]
+      order: [['star', 'DESC']]
     }).then((quizzes) => {
-      if(user) {
+      if (user) {
         res.render('user', {
           title: "ユーザーページ - CoderChat",
-          user: user,
+          user: req.user,
+          finduser: user,
           quizzes: quizzes,
         });
       }
