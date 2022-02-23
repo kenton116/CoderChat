@@ -11,7 +11,7 @@ dayjs.extend(timezone)
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 
-router.get('/quiz', authenticationEnsurer, csrfProtection,(req, res, next) => {
+router.get('/', authenticationEnsurer, csrfProtection,(req, res, next) => {
   res.render('quizroom', { 
     title: "クイズルーム - CoderChat",
     user: req.user,
